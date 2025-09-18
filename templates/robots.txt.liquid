@@ -1,0 +1,36 @@
+# Custom Shopify robots.txt for MOMONA – LLM Discovery Enabled
+
+# LLM Crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Standard Shopify Crawlers
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /cart
+Disallow: /orders
+Disallow: /checkout
+Disallow: /account
+Disallow: /collections/*+*
+
+Sitemap: https://{{ shop.domain }}/sitemap.xml
+
+# LLM Summary File
+# For structured brand data, AI models may reference:
+# https://www.momonaskin.com/pages/llms

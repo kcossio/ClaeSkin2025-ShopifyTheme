@@ -1,0 +1,176 @@
+<style>
+    .g-mission{
+        padding: 50px 20px;
+        background: {{ section.settings.bg }};
+    }
+
+    .g-mission-wrap{
+        display: flex;
+    }
+
+    .g-mission-wrap > div, .g-mission-images > div{
+        width: 50%;
+    }
+
+    .g-mission-images > div{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .g-mission-images{
+        display: flex;
+        gap: 10px;
+    }
+
+    .g-mi--full{
+        padding-top: 100%;
+        position: relative;
+    }
+
+    .g-mi--half{
+        padding-top: 50%;
+        position: relative;
+    }
+
+    .g-mi--half img,
+    .g-mi--full img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 2px;
+        border: 0.5px solid #FDF7F2;
+    }
+
+    .g-mission-content p{
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .g-mission-content h2{
+        font-weight: 500;
+        font-size: 42px;
+        line-height: 45px;
+        letter-spacing: 0%;
+        text-align: center;
+    }
+
+    .g-mission-content h2,
+    .g-mission-content p{
+        margin: 0;
+        color: #fff;
+    }
+
+    .g-mission-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        max-width: 483px;
+        margin: 0 auto;
+        gap: 30px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-mission-wrap{
+            flex-direction: column-reverse;
+            gap: 20px;
+        }
+
+        .g-mission-wrap > div{
+            width: 100%;
+        }   
+
+        .g-mission-content h2{
+            font-size: 28px;
+            line-height: 30px;
+        }
+
+        .g-mission-content p{
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .g-mission-wrap > div{
+            gap: 10px;
+        }
+
+        .g-mission{
+            padding: 30px 20px;
+        }
+    }
+</style>
+<div class="g-mission">
+    <div class="g-wrap">
+        <div class="g-mission-wrap">
+            <div class="g-mission-images">
+                <div>
+                    <div class="g-mi--full"><img src="{{ section.settings.image_1 | image_url: width: "2000px" }}" width="" height="" alt=""></div>
+                    <div class="g-mi--half"><img src="{{ section.settings.image_2 | image_url: width: "2000px" }}" width="" height="" alt=""></div>
+                </div>
+                <div>
+                    <div class="g-mi--half"><img src="{{ section.settings.image_3 | image_url: width: "2000px" }}" width="" height="" alt=""></div>
+                    <div class="g-mi--full"><img src="{{ section.settings.image_4 | image_url: width: "2000px" }}" width="" height="" alt=""></div>
+                </div>
+            </div>
+            <div class="g-mission-content">
+                <h2>{{ section.settings.title }}</h2>
+                <p>{{ section.settings.content }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS PDP Mission",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background",
+        "default": "#3C3224"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "Image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_4",
+        "label": "Image 4"
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS PDP Mission"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,477 @@
+<style>
+    .g-table{
+        padding: 50px 20px;
+        background: {{ section.settings.bg }}; 
+    }
+
+    .g-table-wrap{
+        max-width: 680px;
+        margin: 140px auto 0 auto;
+        border-radius: 10px;
+    }
+
+    .g-table-row, .g-table-header{
+        display: flex;
+    }
+
+    .g-tr-col-2{
+        flex: 2;
+    }
+
+    .g-tr-col-1{
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .g-table-col-title, .g-table-col-others, .g-table-col-brand{
+        border-top: 1.5px solid #50422F24;
+        padding: 16px 0;
+    }
+
+    .g-table-col{
+        padding: 16px 0;
+        position: relative;
+    }
+
+    .g-table-col-brand{
+        background: #3C2D18;
+    }
+
+    .g-table-header > div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .g-table-header > div.g-table-col-brand{
+        flex-direction: column;
+        color: #fff;
+        position: relative;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        padding: 0;
+        height: 90px;
+    }
+
+    .g-table-header > div.g-table-col-brand img{
+        position: absolute;
+        width: 120%;
+        bottom: -30%;
+        right: 0;
+    }
+
+    .g-table-top-block{
+        position: absolute;
+        display: block !important;
+        height: 30px;
+        width: 100%;
+        top: -30px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: #90B499;
+    }
+
+    .g-table-bottom-block{
+        position: absolute;
+        display: block !important;
+        height: 20px;
+        width: 100%;
+        bottom: -20px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: #90B499;
+    }
+
+    .g-table h2{
+        font-weight: 700;
+        font-size: 42px;
+        line-height: 57.6px;
+        text-align: center;
+        margin: 0 0 20px 0;
+        color: #3C2D18;
+    }
+
+    .g-table h2 strong{
+        color: #90B499;
+    }
+
+    .g-table-icons{
+        max-width: 35px;
+    }
+    
+    .g-table-row--first{
+        overflow: hidden;
+    }
+
+    .g-table-row--end{
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border: 1.5px solid #50422F24;
+    }
+
+    .g-table-col-title{
+        font-size: 21px;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        font-weight: 400;
+        color: #50422F;
+    }
+
+    .g-table-col.g-table-col-others{
+        background: #FCF4EE;
+        margin-left: 10px;
+    }
+    
+    .g-table-sub{
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 19px;
+        line-height: 26.6px;
+    }
+
+    .g-table-col svg{
+        width: 27px;
+    }
+
+    .g-table-row--first .g-tr-col-2,
+    .g-table-row--first .g-tr-col-1{
+        border: 0;
+    }
+
+    .g-table-col--others{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        text-align: center;
+        color: #50422F;
+        padding-bottom: 10px;
+    }
+
+    .g-table-col--others_block{
+        width: 100%;
+        height: 30px;
+        bottom: 0;
+        position: relative;
+        background: #FCF4EE;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .g-table .g-cta{
+        margin-top: 50px;
+    }
+
+    @media only screen and (max-width: 480px) {
+        .g-table-header > div.g-table-col-brand{
+            height: 45px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-table h2{
+            font-size: 22px;
+            line-height: 22px;
+        }
+
+        .g-table-col-title, .g-table-col-others{
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+        .g-table-row:not(.g-table-header) .g-table-col img{
+            width: 22px;
+            height: 22px;
+        }
+
+        .g-table-col.g-table-col-brand > span{
+            font-size: 11px;
+        }
+
+        .g-table-header > div.g-table-col-brand img{
+            top: unset;
+            max-width: 140px;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .g-table-col--others{
+            font-size: 11px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .g-table-col--others_block{
+            height: 10px;
+        }
+
+        .g-table-wrap{
+            margin: 40px auto 0 auto;
+            padding-left: 0;
+        }
+
+        .sectionid .g-vt-risk-free p{
+            margin-top: 10px;
+        }
+
+        .g-table-sub{
+            font-size: 14px;
+        }
+
+        .g-table-col.g-tr-col-1{
+            padding-bottom: 0;
+        }
+
+        .g-table .g-cta{
+            margin-top: 15px;
+            padding-bottom: 0;
+        }
+
+        .g-table{
+            padding: 30px 20px;
+        }
+
+        .g-table-col-title{
+            padding-left: 0;
+            padding-right: 10px;
+        }
+
+        .g-table-row .g-table-col-brand::after,
+        .g-table-row .g-table-col-others::after{
+            height: 10px;
+            content: '';
+            bottom: -9px;
+            position: absolute;
+            width: 100%;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .g-table-row .g-table-col-brand::after{
+            background: #3C2D18;
+        }
+
+        .g-table-row .g-table-col-others::after{
+            background: #FCF4EE;
+        }
+    }
+</style>
+<div class="sectionid g-table g-sections">
+    <div class="g-wrap">
+
+        <h2>{{ section.settings.title }}</h2>
+
+        <div class="g-table-wrap">
+            <div class="g-table-row g-table-header">
+                <div class=" g-table-col-title g-tr-col-2" style="display: block; border: 0;"></div>
+                <div class="g-table-col g-table-col-brand g-tr-col-1">
+                    <img src="{{ section.settings.brand_image | image_url: width: "500px" }}" width="" height="" alt="">
+                </div>
+                <div class="g-table-col g-tr-col-1" style="margin-left: 10px; flex-direction: column; padding: 0; justify-content: flex-end;">
+                    <span class="g-table-col--others">{{ section.settings.brand_label }}</span>
+                    <span class="g-table-col--others_block"></span>
+                </div>
+            </div>
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'block' -%}
+                  <div class="g-table-row{% if forloop.first %} g-table-row--first{% endif %}">
+                      <div class="g-table-col-title g-tr-col-2">{{ block.settings.title }}</div>
+                      <div class="g-table-col g-table-col-brand g-tr-col-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9999 38.2999C30.9469 38.2999 38.1999 31.0469 38.1999 22.0999C38.1999 13.1529 30.9469 5.8999 21.9999 5.8999C13.0529 5.8999 5.79993 13.1529 5.79993 22.0999C5.79993 31.0469 13.0529 38.2999 21.9999 38.2999ZM21.5827 28.6518L30.5827 17.8518L27.8171 15.5471L20.0789 24.8329L16.0727 20.8267L13.5271 23.3723L18.9271 28.7723L20.3208 30.166L21.5827 28.6518Z" fill="white"/>
+                          </svg>
+                      </div>
+                      <div class="g-table-col g-table-col-others g-tr-col-1">
+                          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M33.2 17.0999C33.2 26.0469 25.9471 33.2999 17 33.2999C8.05304 33.2999 0.800049 26.0469 0.800049 17.0999C0.800049 8.15289 8.05304 0.899902 17 0.899902C25.9471 0.899902 33.2 8.15289 33.2 17.0999ZM23.4606 23.5604C22.8748 24.1462 21.925 24.1462 21.3392 23.5604L16.9999 19.2211L12.6606 23.5604C12.0748 24.1462 11.1251 24.1462 10.5393 23.5604C9.95353 22.9746 9.95353 22.0249 10.5393 21.4391L14.8786 17.0998L10.5392 12.7604C9.95345 12.1746 9.95346 11.2249 10.5392 10.6391C11.125 10.0533 12.0748 10.0533 12.6606 10.6391L16.9999 14.9785L21.3393 10.6391C21.9251 10.0533 22.8748 10.0533 23.4606 10.6391C24.0464 11.2249 24.0464 12.1746 23.4606 12.7604L19.1213 17.0998L23.4606 21.4391C24.0463 22.0249 24.0463 22.9746 23.4606 23.5604Z" fill="#717171" fill-opacity="0.22"/>
+                          </svg>
+                      </div>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+        </div>
+
+        <div class="g-cta">
+            {%- assign product_form_id = 'product-form-' | append: section.id -%}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'link_button' -%}
+                  <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+                  <div class="g-cta-bottom">
+                      {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                      </div>
+                      {% endif %}
+                      {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                      </div>
+                      {% endif %}
+                  </div>
+                {%- when 'buy_buttons' -%}
+                  {%- render 'buy-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id,
+                    show_pickup_availability: true
+                  -%}
+                  <div class="g-cta-bottom">
+                      {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                      </div>
+                      {% endif %}
+                      {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                      </div>
+                      {% endif %}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+        </div>
+
+
+    </div>
+</div>
+                              
+{% schema %}
+  {
+    "name": "MMS Table",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#F5E8DE"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_image",
+        "label": "Brand Image"
+      },
+      {
+        "type": "text",
+        "id": "brand_label",
+        "label": "Brand Label",
+        "default": "Traditional Moisturizers"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA URL"
+      },
+      {
+        "type": "color",
+        "id": "cta_bg",
+        "label": "CTA Background"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Text Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_1",
+        "label": "CTA Bottom Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_1",
+        "label": "CTA Bottom Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_2",
+        "label": "CTA Bottom Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_2",
+        "label": "CTA Bottom Text 2"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "buy_buttons",
+        "name": "t:sections.main-product.blocks.buy_buttons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_dynamic_checkout",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_gift_card_recipient",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_prices",
+            "default": false,
+            "label": "Show Price and Compare Price"
+          }
+        ]
+      },
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      },
+      {
+        "type": "link_button",
+        "name": "Link Button",
+        "settings": [
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Table"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,170 @@
+<style>
+    /* MARQUEE */
+    .{{ section.id }}.marquee {
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        width: 100%;
+        height: {{ section.settings.height }}px;
+        background: linear-gradient(90deg, {{ section.settings.bg_color }} 0%, {{ section.settings.bg_color }} 100%);
+        position: relative;
+        display: flex;
+        align-items: center;
+        border-top: 1px solid {{ section.settings.text_color }};
+        border-bottom: 1px solid {{ section.settings.text_color }};
+    }
+
+    .{{ section.id }} .marquee-content {
+        display: inline-flex;
+        align-items: center;
+        position: absolute;
+        white-space: nowrap;
+    }
+
+    .{{ section.id }} .marquee-content:hover{
+        animation-play-state: paused;
+    }
+
+    .{{ section.id }} .marquee-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-right: 20px;
+        vertical-align: top;
+
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: center;
+        color: {{ section.settings.text_color }};
+    }
+
+    .{{ section.id }} .marquee-item img {
+        display: block;
+        max-width: {{ section.settings.icon_width }}px;
+    }
+
+    {% if section.settings.animation == "ltr" %}
+      @keyframes marquee{{ section.id }} {
+          from {
+              transform: translateX(-50%);
+          }
+          to {
+              transform: translateX(0%);
+          }
+      }
+      {% else %}
+      @keyframes marquee{{ section.id }} {
+          from {
+              transform: translateX(0%);
+          }
+          to {
+              transform: translateX(-50%);
+          }
+      }
+    {% endif %}
+
+    .{{ section.id }} .marquee-content {
+        animation: marquee{{ section.id }} 25s linear infinite;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .{{ section.id }} .marquee-item{
+            font-size: 14px;
+        }
+    }
+
+</style>
+<div class="{{ section.id }} marquee">
+    <div class="marquee-content">
+
+        {% for i in (1..4) %}
+          {% for block in section.blocks %}
+            <div class="marquee-item">
+                <img src="{{ block.settings.image | image_url: width: "100px" }}" alt="" width="" height="">
+                <span>{{ block.settings.text }}</span>
+            </div>
+          {% endfor %}
+        {% endfor %}
+
+    </div>
+</div>
+<script>
+    /*document.addEventListener("DOMContentLoaded", function() {
+        const marqueeContent = document.querySelector('.marquee-content');
+        const contentClone = marqueeContent.innerHTML;
+        marqueeContent.innerHTML += contentClone;
+    });*/
+</script>
+
+{% schema %}
+  {
+    "name": "MMS Marquee",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "BG Color",
+        "default": "#E4F5A1"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#000000"
+      },
+      {
+        "type": "number",
+        "id": "height",
+        "label": "Height in px",
+        "default": 54
+      },
+      {
+        "type": "number",
+        "id": "icon_width",
+        "label": "Icon Width in px",
+        "default": 30
+      },
+      {
+        "type": "select",
+        "id": "animation",
+        "label": "Animation Direction",
+        "options": [
+          {
+            "label": "Left To Right",
+            "value": "ltr"
+          },
+          {
+            "label": "Right To Left",
+            "value": "rtl"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "marquee",
+        "name": "Marquee",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image Icon"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Marquee"
+      }
+    ]
+  }
+{% endschema %}

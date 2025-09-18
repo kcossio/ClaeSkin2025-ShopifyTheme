@@ -1,0 +1,80 @@
+<div class="page-width">    
+    {%- if section.settings.title -%}
+        <h2 class="radiant-steps__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    <div class="radiant-steps__blocks">
+        <div class="grid grid--3-col grid--1-col-tablet-down">
+            {%- for block in section.blocks -%}
+                <div class="grid__item">
+                    <div class="radiant-steps__item">
+                        <div class="radiant-steps__item-image">
+                            {%- assign image = block.settings.image -%}
+                            {{ image | image_url: width: image.width | image_tag: class: 'img-res', loading: 'lazy' }}
+                        </div>
+                        <div class="radiant-steps__item-content">
+                            <h3 class="radiant-steps__item-step">{{ block.settings.step }}</h3>
+                            <h4 class="radiant-steps__item-title">{{ block.settings.title }}</h4>
+                            <p class="radiant-steps__item-text">{{ block.settings.content }}</p>
+                        </div>
+                    </div>
+                </div>
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% schema %}
+  {
+  "name": "Radiant Steps",
+  "class": "radiant-steps",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Three Steps to Radiant Skin"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Step",
+      "type": "step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Pump"
+        },
+        {
+          "type": "text",
+          "id": "step",
+          "label": "Step",
+          "default": "Step 1"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Dispense a pea-sized amount of Super Tallow™ into your hands. The convenient pump ensures mess-free application every time."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Radiant Steps"
+    }
+  ]
+}  
+{% endschema %}
+

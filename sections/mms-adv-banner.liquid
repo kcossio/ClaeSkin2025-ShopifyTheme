@@ -1,0 +1,244 @@
+<style>
+    .g-adv-banner{
+        height: 600px;
+        background: #FDF7F2;
+        position: relative;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .g-adv-image::before{
+        content: '';
+        position: absolute;
+        background: linear-gradient(90deg, #FDF7F2 3%, rgba(253, 247, 242, 0) 100%);
+        width: 100%;
+        height: 100%;
+    }
+
+    .g-adv-image{
+        position: absolute;
+        height: 100%;
+        width: 50%;
+        right: 0;
+        top: 0;
+    }
+
+    .g-adv-image img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    .g-add-content{
+        width: 50%;
+        max-width: 812px;
+        padding: 20px 20px 20px 100px;
+    }
+
+    .g-adv-arrow{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .g-adv-review{
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .g-adv-review p{
+        margin: 0 0 10px 0;
+        color: #2C1A0B;
+    }
+
+    .g-adv-review-name{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .g-adv-review-name > span{
+        display: flex;
+    }
+
+    .g-adv-reviews-slider .swiper-pagination-bullet.swiper-pagination-bullet-active{
+        width: 20px;
+        background: #2C1A0BCC;
+        border-radius: 5px;
+    }
+    
+    .g-adv-reviews-slider .swiper-pagination{
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .g-adv-banner .g-cta{
+        padding: 0;
+    }
+
+    .g-adv-banner .g-cta a{
+        font-weight: 400;
+        font-size: 22px;
+        text-transform: unset;
+        line-height: 24px;
+        border-radius: 30px;
+        padding: 17px 0;
+        max-width: 388px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .g-adv-banner{
+            flex-direction: column;
+            height: unset;
+        }
+
+        .g-add-content{
+            width: 100%;
+            max-width: unset;
+            padding: 10px;
+        }
+
+        .g-adv-image{
+            position: relative;
+            width: 100%;
+        }
+
+        .g-add-content h1,
+        .g-add-content p,
+        .g-adv-banner .g-cta{
+            text-align: center;
+        }
+
+        .g-add-content h1{
+            font-size: 28px;
+        }
+
+        .g-add-content p{
+            font-size: 14px;
+        }
+
+        .g-adv-banner .g-cta a{
+            font-size: 19px;
+            padding: 12px 0;
+        }
+
+        .g-adv-image::before{
+            background: linear-gradient(180deg, #FDF7F2 3%, rgba(253, 247, 242, 0) 100%);
+        }
+    }
+</style>
+<div class="g-adv-banner">
+    <div class="g-add-content">
+        <h1>{{ section.settings.title }}</h1>
+        <p>{{ section.settings.content }}</p>
+        <div class="g-cta">
+            <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+        </div>
+
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'review_widget' %}
+              {% render 'mms-adv-review-widget', block: block %}
+          {% endcase %}
+        {% endfor %}
+
+    </div>
+    <div class="g-adv-image">
+        <img src="{{ section.settings.image | image_url: width: "1980px" }}" width="" height="" alt="">
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        new Swiper('.g-adv-reviews-slider', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            grabCursor: true,
+            pagination:  {
+                el: ".swiper-pagination",
+                clickable: true, 
+            }
+        });
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "MMS ADV Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "review_widget",
+        "name": "Review Widget",
+        "settings": [
+          {
+            "type": "text",
+            "id": "rev_text_1",
+            "label": "Review Text 1"
+          },
+          {
+            "type": "text",
+            "id": "rev_name_1",
+            "label": "Review Name 1"
+          },
+          {
+            "type": "text",
+            "id": "rev_text_2",
+            "label": "Review Text 2"
+          },
+          {
+            "type": "text",
+            "id": "rev_name_2",
+            "label": "Review Name 2"
+          },
+          {
+            "type": "text",
+            "id": "rev_text_3",
+            "label": "Review Text 3"
+          },
+          {
+            "type": "text",
+            "id": "rev_name_3",
+            "label": "Review Name 3"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS ADV Banner"
+      }
+    ]
+  }
+{% endschema %}

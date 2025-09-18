@@ -1,0 +1,322 @@
+<style>
+    .g-footer{
+        background: {{ section.settings.bg }};
+        padding: 0 20px 50px 20px;
+    }
+
+    .g-footer p{
+        color: #fff;
+    }
+
+    .g-footer-wrap{
+        border-top: 1px solid #FFFFFF4D;
+        border-bottom: 1px solid #FFFFFF4D;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .g-footer-wrap ul{
+        margin: 0;
+        padding: 0;
+    }
+
+    .g-footer-wrap ul li{
+        list-style: none;
+        display: inline-block;
+        padding: 20px 0px;
+    }
+
+    .g-footer-menu{
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+    }
+
+    .g-footer-menu li{
+        text-align: left;
+        width: 50%;
+    }
+
+    .g-footer-menu li a{
+        text-decoration: none;
+        color: #fff;
+
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 14px;
+        letter-spacing: 0%;
+    }
+
+
+    .g-mm-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        cursor: pointer;
+        border-bottom: 1px solid #000;
+    }
+
+    .g-mm-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0 10px;
+    }
+
+    .g-mm-content p {
+        font-size: 18px;
+        line-height: 27px;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .g-mm-header > span {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 24px;
+        text-align: left;
+    }
+
+    .g-mm-icon {
+        color: #fff;
+        width: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 22px;
+        line-height: 1;
+    }
+
+    .g-mm-content.open {
+        max-height: 3000px; /* Adjust according to the expected content size */
+        padding: 10px;
+    }
+
+    .g-mm-header.g-active svg {
+        transform: rotate(90deg);
+    }
+
+    .g-mm-content ul{
+        margin: 0;
+        padding: 0;
+    }
+    
+    .g-mm-content ul li{
+        list-style: none;
+    }
+
+    .g-mm-content ul li a{
+        font-size: 20px;
+        font-weight: 400;
+        display: block;
+        padding: 5px 0 5px 10px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .g-mobile-menu{
+        display: none;
+    }
+
+    .g-footer h2{
+        text-align: center;
+        color: #fff;
+        font-weight: 500;
+        font-size: 42.26px;
+        line-height: 43.53px;
+        letter-spacing: -3%;
+        margin-top: 0;
+    }
+
+    .g-footer .g-cta{
+        max-width: 600px;
+        padding-bottom: 50px;
+    }
+
+    .g-footer .g-cta-bottom > div span{
+        color: #fff;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .g-footer-menu li a{
+            font-size: 14px;
+            line-height:18px;
+        }
+
+        .g-footer-wrap > img{
+            max-width: 100px;
+        }
+
+        .g-footer-wrap ul li{
+            padding: 0 5px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        /* .desktop-menu{
+            display: none;
+        } */
+
+        .g-mobile-menu{
+            display: block;
+        }
+
+        .g-footer-wrap{
+            padding: 20px 0;
+        }
+
+        .g-footer{
+            padding: 0 20px 20px 20px;
+        }
+
+        .g-footer-wrap-desktop{
+            border: 0;
+        }
+
+        .g-footer-menu{
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .g-footer-menu.desktop-menu li{
+            width: 100%;
+            text-align: left;
+            padding: 0;
+        }
+
+        .g-footer-menu li.list-mobile{
+            border-top: 1px solid #FFFFFF4D;
+            border-bottom: 1px solid #FFFFFF4D;
+            padding: 15px 0;
+        }
+
+        .g-footer p{
+            font-size: 10px;
+        }
+
+        .g-footer .g-cta a{
+            font-size: 16px;
+            padding: 16px;
+        }
+
+        .g-footer h2{
+            font-size: 28px;
+            line-height: 29px;
+        }
+
+        .g-footer-wrap ul li a img{
+            max-width: 16.8px;
+        }
+
+        .g-footer-wrap > img{
+            max-width: 50px;
+        }
+    }
+</style>
+<div class="g-footer">
+    <div class="g-wrap">
+        <div class="g-footer-wrap">
+            <img src="{{ section.settings.logo | image_url: width: "500px" }}" width="" height="" alt="">
+
+            <ul>
+                {% for block in section.blocks %}
+                  <li><a href="{{ block.settings.url }}"><img src="{{ block.settings.logo | image_url: width: "500px" }}" width="" height="" alt=""></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="g-footer-wrap g-footer-wrap-desktop" style="border-top: 0;">
+            <ul class="g-footer-menu desktop-menu">
+                {% for link in linklists[section.settings.menu].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <script>
+            // Select all accordion headers
+            const footermenus = document.querySelectorAll('.g-mm-header');
+        
+            footermenus.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                console.log(content);
+        
+                // Toggle active class for the header
+                header.classList.toggle('g-active');
+        
+                // Show or hide the content with smooth transition
+                if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                } else {
+                content.classList.add('open');
+                }
+            });
+            });
+        </script>
+
+        <p class="footer-copyright">{{ section.settings.copyright }}</p>
+        <img src="{{ section.settings.payment | image_url: width: "2000px" }}" width="" height="" alt="">
+    </div>
+</div>
+    
+{% schema %}
+  {
+    "name": "MMS Footer",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#20190F"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu"
+      },
+      {
+        "type": "text",
+        "id": "copyright",
+        "label": "Copyright Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "payment",
+        "label": "Payment Icons"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Footer"
+      }
+    ]
+  }
+{% endschema %}

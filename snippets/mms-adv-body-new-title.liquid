@@ -1,0 +1,77 @@
+<style>
+.g-adv-body-headline-2 {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.g-adv-body-headline-2 > div{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 76px;
+}
+
+.g-adv-body-headline-2 h2{
+    color: #2C1A0B;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 45px;
+    margin: 0;
+}
+
+.g-adv-body-headline-2 h2 strong{
+    font-size: 42px;
+    display: block;
+}
+
+.leaf-left,
+.leaf-right{
+    position: absolute;
+}
+
+.leaf-left{
+    left: 0;
+}
+
+.leaf-right{
+    right: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .g-adv-body-headline-2{
+        padding: 20px 0;
+    }
+
+    .g-adv-body-headline-2 h2{
+        font-size: 21px;
+        line-height: 28px;
+    }
+
+    .g-adv-body-headline-2 h2 strong{
+        font-size: 24px;
+    }
+
+    .g-adv-body-headline-2 > div{
+        padding: 0 35px;
+    }
+
+    .leaf-left, .leaf-right{
+        max-width: 35px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .g-adv-body-headline-2 > div{
+        width: 100%;
+    }
+}
+</style>
+<div class="g-adv-body-headline-2">
+<div>
+    <img class="leaf-left" src="https://cdn.shopify.com/s/files/1/0636/1933/4342/files/leaf-left.png" width="" height="" alt="">
+    {{ block.settings.title }}
+    <img class="leaf-right" src="https://cdn.shopify.com/s/files/1/0636/1933/4342/files/leaf-right.png" width="" height="" alt="">
+</div>
+</div>

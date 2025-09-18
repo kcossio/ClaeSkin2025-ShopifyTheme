@@ -1,0 +1,154 @@
+<div class="page-width">
+    <div class="testimonials__wrapper">
+        <div class="testimonials__content">
+            {%- if section.settings.title -%}
+                <h2 class="testimonials__title">{{ section.settings.title }}</h2>
+            {%- endif -%}
+            {%- if section.settings.content -%}
+                <p class="testimonials__text">{{ section.settings.content }}</p>
+            {%- endif -%}
+        </div>
+
+        <div class="testimonials__reviews">
+            <div class="testimonials__carousel">
+              <div class="swiper">
+                  <div class="swiper-wrapper">
+                    {%- for block in section.blocks -%}
+                        <div class="swiper-slide">
+                          <div class="testimonial__item">
+                              <div class="grid grid--2-col grid--1-col-tablet-down" >
+                                  <div class="grid__item">
+                                      {%- if block.settings.image -%}
+                                          <div class="testimonial__image">
+                                              {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: class: 'img-res', loading: 'lazy' }}
+                                          </div>
+                                      {%- endif -%}
+                                  </div>
+                                  <div class="grid__item">
+                                    <div class="testimonial__content">
+                                        <div class="testimonial__rating">
+                                            <svg width="133" height="26" viewBox="0 0 133 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.9769 3.09117C11.2673 2.15156 12.5973 2.15156 12.8877 3.09117L14.3934 7.96292C14.5229 8.3819 14.9103 8.66762 15.3488 8.66762H20.3238C21.2803 8.66762 21.691 9.8817 20.9307 10.4623L16.8213 13.601C16.4882 13.8555 16.3491 14.2906 16.4729 14.691L18.0221 19.7032C18.3096 20.6334 17.2334 21.3842 16.4597 20.7932L12.5392 17.7989C12.1809 17.5251 11.6836 17.5251 11.3253 17.7989L7.40486 20.7932C6.63113 21.3842 5.55496 20.6334 5.84246 19.7032L7.3916 14.691C7.51537 14.2906 7.37628 13.8555 7.04318 13.601L2.93377 10.4623C2.17356 9.8817 2.58417 8.66762 3.54075 8.66762H8.5157C8.95424 8.66762 9.34161 8.3819 9.47111 7.96292L10.9769 3.09117Z" fill="#30231A"/>
+                                                <path d="M38.0663 3.09117C38.3567 2.15156 39.6867 2.15156 39.9771 3.09117L41.4828 7.96292C41.6123 8.3819 41.9997 8.66762 42.4382 8.66762H47.4132C48.3698 8.66762 48.7804 9.8817 48.0202 10.4623L43.9108 13.601C43.5777 13.8555 43.4386 14.2906 43.5623 14.691L45.1115 19.7032C45.399 20.6334 44.3228 21.3842 43.5491 20.7932L39.6287 17.7989C39.2703 17.5251 38.7731 17.5251 38.4147 17.7989L34.4943 20.7932C33.7205 21.3842 32.6444 20.6334 32.9319 19.7032L34.481 14.691C34.6048 14.2906 34.4657 13.8555 34.1326 13.601L30.0232 10.4623C29.263 9.8817 29.6736 8.66762 30.6302 8.66762H35.6051C36.0437 8.66762 36.431 8.3819 36.5605 7.96292L38.0663 3.09117Z" fill="#30231A"/>
+                                                <path d="M65.1557 3.09117C65.4461 2.15156 66.7761 2.15156 67.0665 3.09117L68.5722 7.96292C68.7017 8.3819 69.0891 8.66762 69.5276 8.66762H74.5026C75.4592 8.66762 75.8698 9.8817 75.1096 10.4623L71.0002 13.601C70.6671 13.8555 70.528 14.2906 70.6517 14.691L72.2009 19.7032C72.4884 20.6334 71.4122 21.3842 70.6385 20.7932L66.7181 17.7989C66.3597 17.5251 65.8625 17.5251 65.5041 17.7989L61.5837 20.7932C60.81 21.3842 59.7338 20.6334 60.0213 19.7032L61.5704 14.691C61.6942 14.2906 61.5551 13.8555 61.222 13.601L57.1126 10.4623C56.3524 9.8817 56.763 8.66762 57.7196 8.66762H62.6945C63.1331 8.66762 63.5204 8.3819 63.6499 7.96292L65.1557 3.09117Z" fill="#30231A"/>
+                                                <path d="M92.2452 3.09117C92.5356 2.15156 93.8656 2.15156 94.156 3.09117L95.6617 7.96292C95.7912 8.3819 96.1786 8.66762 96.6171 8.66762H101.592C102.549 8.66762 102.959 9.8817 102.199 10.4623L98.0896 13.601C97.7566 13.8555 97.6175 14.2906 97.7412 14.691L99.2904 19.7032C99.5779 20.6334 98.5017 21.3842 97.728 20.7932L93.8076 17.7989C93.4492 17.5251 92.952 17.5251 92.5936 17.7989L88.6732 20.7932C87.8994 21.3842 86.8233 20.6334 87.1108 19.7032L88.6599 14.691C88.7837 14.2906 88.6446 13.8555 88.3115 13.601L84.2021 10.4623C83.4419 9.8817 83.8525 8.66762 84.8091 8.66762H89.784C90.2225 8.66762 90.6099 8.3819 90.7394 7.96292L92.2452 3.09117Z" fill="#30231A"/>
+                                                <path d="M119.335 3.09117C119.625 2.15156 120.955 2.15156 121.245 3.09117L122.751 7.96292C122.881 8.3819 123.268 8.66762 123.707 8.66762H128.681C129.638 8.66762 130.049 9.8817 129.288 10.4623L125.179 13.601C124.846 13.8555 124.707 14.2906 124.831 14.691L126.38 19.7032C126.667 20.6334 125.591 21.3842 124.817 20.7932L120.897 17.7989C120.539 17.5251 120.041 17.5251 119.683 17.7989L115.763 20.7932C114.989 21.3842 113.913 20.6334 114.2 19.7032L115.749 14.691C115.873 14.2906 115.734 13.8555 115.401 13.601L111.291 10.4623C110.531 9.8817 110.942 8.66762 111.898 8.66762H116.873C117.312 8.66762 117.699 8.3819 117.829 7.96292L119.335 3.09117Z" fill="#30231A"/>
+                                            </svg>
+                                        </div>
+                                        {%- if block.settings.review -%}
+                                            <p class="testimonial__review">{{ block.settings.review }}</p>
+                                        {%- endif -%}
+                                        {%- if block.settings.name -%}
+                                            <p class="testimonial__name">{{ block.settings.name }}</p>
+                                        {%- endif -%}
+                                        {%- if block.settings.position -%}
+                                            <p class="testimonial__position">{{ block.settings.position }}</p>
+                                        {%- endif -%}
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                  <div class="swiper-button-next">
+                    <svg width="63" height="12" viewBox="0 0 63 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M62.5303 6.53034C62.8232 6.23745 62.8232 5.76257 62.5303 5.46968L57.7574 0.696709C57.4645 0.403816 56.9896 0.403816 56.6967 0.696709C56.4038 0.989602 56.4038 1.46448 56.6967 1.75737L60.9393 6.00001L56.6967 10.2427C56.4038 10.5355 56.4038 11.0104 56.6967 11.3033C56.9896 11.5962 57.4645 11.5962 57.7574 11.3033L62.5303 6.53034ZM0 6L-1.31134e-07 6.75L62 6.75001L62 6.00001L62 5.25001L1.31134e-07 5.25L0 6Z" fill="#30231A"/>
+                    </svg>
+                  </div>
+                  <div class="swiper-button-prev">
+                    <svg width="63" height="12" viewBox="0 0 63 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.46967 5.46967C0.176777 5.76256 0.176777 6.23744 0.46967 6.53033L5.24264 11.3033C5.53553 11.5962 6.01041 11.5962 6.3033 11.3033C6.59619 11.0104 6.59619 10.5355 6.3033 10.2426L2.06066 6L6.3033 1.75736C6.59619 1.46447 6.59619 0.989592 6.3033 0.696699C6.01041 0.403806 5.53553 0.403806 5.24264 0.696699L0.46967 5.46967ZM63 6V5.25L1 5.25V6V6.75L63 6.75V6Z" fill="#30231A"/>
+                    </svg>
+                  </div>
+                  <div class="swiper-pagination"></div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="testimonials__shape">
+        <img src="{{ 'arrow-big.svg' | asset_url }}" alt="{{ shop.name }}" loading="lazy" />
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var swiper = new Swiper('.testimonials__carousel .swiper', {
+      spaceBetween: 20,
+      slidesPerView: 1,
+      //autoplay: {
+         //delay: 5000,
+        //disableOnInteraction: false,
+      //},
+         pagination: {
+        el: ".swiper-pagination",
+        type: "fraction",
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+    });
+  });
+</script>
+
+{% schema %}
+  {
+  "name": "Testimonials",
+  "class": "testimonials",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Written in Radiance"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "See how Super Tallow™ is redefining skincare, one glowing transformation at a time."
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Reviews",
+      "type": "reviews",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review",
+          "default": "I’ve always been wary of conventional skin care products due to their long list of unrecognizable ingredients. I feel very fortunate to have found this product. Thank you for bringing it to market!"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Michelle M."
+        },
+        {
+          "type": "text",
+          "id": "position",
+          "label": "Position",
+          "default": "Michelle M.",
+          "placeholder": "verified customer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials"
+    }
+  ]
+}  
+{% endschema %}

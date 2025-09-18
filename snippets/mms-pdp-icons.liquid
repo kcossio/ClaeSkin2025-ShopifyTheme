@@ -1,0 +1,46 @@
+<style>
+  .pdp-col-icons{
+    padding-bottom: 20px;
+  }
+  
+  .pdp-col-icons,
+  .pdp-col-icon{
+    display: flex;
+  }  
+
+  .pdp-col-icon{
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 33.333%;
+  }
+
+  .pdp-col-icon img{
+    width: 60px;
+  }
+
+  .pdp-col-icon span{
+    font-size: 11px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .pdp-col-icon img{
+      width: 40px;
+    }
+  }
+</style>
+<div class="pdp-col-icons">
+  <div class="pdp-col-icon">
+    <img src="{{ block.settings.icon_1 | image_url: width: "500px" }}" alt="" width="" height="">
+    <span>{{ block.settings.text_1 }}</span>
+  </div>
+  <div class="pdp-col-icon">
+    <img src="{{ block.settings.icon_2 | image_url: width: "500px" }}" alt="" width="" height="">
+    <span>{{ block.settings.text_2 }}</span>
+  </div>
+  <div class="pdp-col-icon">
+    <img src="{{ block.settings.icon_3 | image_url: width: "500px" }}" alt="" width="" height="">
+    <span>{{ block.settings.text_3 }}</span>
+  </div>
+</div>

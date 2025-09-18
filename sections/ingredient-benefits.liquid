@@ -1,0 +1,69 @@
+<div class="page-width">
+    <div class="oieb__wrapper">
+        {%- if section.settings.title -%}
+            <h2 class="oieb__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        <div class="oieb__grid grid grid--4-col-desktop grid--2-col-tablet grid--2-col">
+            {%- for block in section.blocks -%}
+                <div class="oieb__item grid__item">
+                    {%- assign icon = block.settings.icon -%}
+                    {{ icon | image_url: width: icon.width | image_tag: class: 'img-res', loading: 'lazy' }}
+                    {%- if block.settings.title -%}
+                        <h3 class="oieb__item-title">{{ block.settings.title }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.content -%}
+                        <p class="oieb__item-content">{{ block.settings.content }}</p>
+                    {%- endif -%}
+                </div>
+            {%- endfor -%}
+        </div>              
+    </div>
+</div>
+
+
+{% schema %}
+  {
+  "name": "Ingredient Benefits",
+  "class": "oieb",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "One Ingredient. Endless Benefits."
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Block",
+      "type": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Barrier Support"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Restores your skin’s natural protection."
+        }
+      ]
+    }
+  ],
+  "presets": [  
+    {
+      "name": "Ingredient Benefits"
+    }
+  ]
+}  
+{% endschema %}

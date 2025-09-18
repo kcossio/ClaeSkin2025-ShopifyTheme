@@ -1,0 +1,64 @@
+<div class="page-width">
+  <div class="our-story__wrapper">
+    <div class="our-story__content">
+      {%- if section.settings.subtitle -%}
+        <h2>{{ section.settings.subtitle }}</h2>
+      {%- endif -%}
+      {%- if section.settings.title -%}
+        <h4>{{ section.settings.title }}</h4>
+      {%- endif -%}
+      {%- if section.settings.content -%}
+        <div class="rte">{{ section.settings.content }}</div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.image -%}
+      {% assign image = section.settings.image %}
+      <div class="our-story__image">
+        <img src="{{ image | image_url: width: image.width  }}" alt="{{ section.settings.title }}">
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "class": "our-story",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "A Journey to a Cleaner, Nontoxic Lifestyle"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,132 @@
+<div class="page-width">
+  <div class="prd-faqs__wrapper">
+    {%- if section.settings.title != blank -%}
+      <h2 class="prd-faqs__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    <div class="prd-faqs__block">
+      <div class="grid grid--2-col grid--1-col-tablet-down">
+        <div class="grid__item">
+          <div class="prd-faqs__column">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'faq_first_column' -%}
+                <div class="prd-faqs__item">
+                  <h3 class="prd-faqs__question">
+                    <span class="prd-faqs__question-title">{{ block.settings.question }}</span>
+                    <span class="prd-faqs__question-icon">
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line y1="6.5" x2="13" y2="6.5" stroke="#DDD9CF"/>
+                        <line x1="6.5" y1="13" x2="6.5" y2="-5.96244e-09" stroke="#DDD9CF"/>
+                      </svg>
+                    </span>
+                  </h3>
+                  <div class="prd-faqs__answer">{{ block.settings.answer }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        <div class="grid__item">
+          <div class="prd-faqs__column">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'faq_second_column' -%}
+                <div class="prd-faqs__item">
+                  <h3 class="prd-faqs__question">
+                    <span class="prd-faqs__question-title">{{ block.settings.question }}</span>
+                    <span class="prd-faqs__question-icon">
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line y1="6.5" x2="13" y2="6.5" stroke="#DDD9CF"/>
+                        <line x1="6.5" y1="13" x2="6.5" y2="-5.96244e-09" stroke="#DDD9CF"/>
+                      </svg>
+                    </span>
+                  </h3>
+                  <div class="prd-faqs__answer">{{ block.settings.answer }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const questions = document.querySelectorAll('.prd-faqs__question');
+
+    questions.forEach(question => {
+      question.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const isVisible = answer.style.display === 'block';
+
+        // Hide all answers
+        document.querySelectorAll('.prd-faqs__answer').forEach(ans => ans.style.display = 'none');
+        document.querySelectorAll('.prd-faqs__item').forEach(item => item.classList.remove('active'));
+
+        // Toggle the clicked answer
+        if (isVisible) {
+          this.parentElement.classList.remove('active');
+        } else {
+          this.parentElement.classList.add('active');
+        }
+        //answer.parentElement.classList.toggle('active');
+        answer.style.display = isVisible ? 'none' : 'block';
+      });
+    });
+  });
+</script>
+
+{% schema %}
+  {
+  "name": "Product FAQs",
+  "class": "prd-faqs",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "FAQ First Column",
+      "type": "faq_first_column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    },
+    {
+      "name": "FAQ Second Column",
+      "type": "faq_second_column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQs"
+    }
+  ]
+}  
+{% endschema %}

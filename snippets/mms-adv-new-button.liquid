@@ -1,0 +1,115 @@
+<!-- NEW CTA -->
+<style>
+    .g-cta-new {
+        margin: 0 auto;
+        width: 100%;
+    }
+    .g-cta-new a{
+        font-weight: 400;
+        font-size: 21px;
+        line-height: 24px;
+        text-decoration: none;
+        padding: 11px 44px;
+        background: #3C2D18;
+        border-radius: 50px;
+        color: #fff;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .g-cta-bottom-text{
+        text-align: center;
+        margin-top: 10px;
+        color: #2C1A0B;
+    }
+
+    .g-cta-limited{
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .g-cta-limited p{
+        margin: 0;
+    }
+
+    .g-cta-limited-circle{
+        position: relative;
+        background: #F28F3B1A;
+        width: 25px;
+        height: 25px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .g-cta-limited-circle::before{
+        box-sizing: border-box;
+        width: 21px;
+        height: 21px;
+        border-radius: 21px;
+        background: #F28F3B66;
+        content: '';
+        position: absolute;
+    }
+
+    .g-cta-limited-circle-sub{
+        position: relative;
+        background: #F28F3BA6;
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .g-cta-limited-circle-sub::before{
+        box-sizing: border-box;
+        width: 11px;
+        height: 11px;
+        border-radius: 11px;
+        background: #F28F3B;
+        content: '';
+        position: absolute;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-cta-new a{
+            font-size: 14px;
+            line-height: 16px;
+        }
+
+        .g-cta-bottom-text{
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .g-cta-limited{
+            justify-content: center;
+        }
+    }
+</style>
+{% if block.settings.limited_time != blank %}
+<div class="g-cta-limited">
+    <span class="g-cta-limited-circle">
+        <span class="g-cta-limited-circle-sub"></span>
+    </span>
+    {{ block.settings.limited_time }}
+</div>
+{% endif %}
+
+{% if block.settings.cta_text != blank %}
+<div class="g-cta-new">
+    <a href="{{ block.settings.cta_url }}" style="max-width: 100%; width: 100%;">{{ block.settings.cta_text }}</a>
+    {% if block.settings.cta_bottom_text != blank %}
+    <div class="g-cta-bottom-text">
+        {{ block.settings.cta_bottom_text }}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+<!-- END NEW CTA -->

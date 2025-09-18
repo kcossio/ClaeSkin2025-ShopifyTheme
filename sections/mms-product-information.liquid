@@ -1,0 +1,1896 @@
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<style>
+    #sn-product-widget{
+        display: none !important;
+    }
+    .g-pdp-wrapper{
+        padding: 50px 20px;
+    }
+
+    .g-pdp-wrap{
+        display: flex;
+        gap: 50px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .g-pdp-wrapper .product-form__buttons button{
+       padding: 30px 0;
+       text-transform: uppercase;
+       font-size: 21px;
+       line-height: 24px;
+       background: {{ section.settings.cta_bg }};
+    }
+  
+    .g-pdp-wrapper .product-form__buttons button span{
+       color: {{ section.settings.cta_color }};
+    }
+
+    .g-pdp-wrapper .product-form__buttons button span.g-pdp-compare{
+      opacity: 0.4;
+    }
+  
+    /* PRODUCT IMAGES */
+    .g-pdp-images{
+        width: 50%;
+    }
+
+    .g-pdp-images--featured{
+        width: 100%;
+        padding-top: 100%;
+    }
+
+    .g-pdp-images--thumb{
+        width: calc(50% - 10px);
+        padding-top: 50%;           
+    }
+
+    .g-pdp-images--desktop {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }   
+
+    .g-pdp-images--desktop > div{
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+    .g-pdp-images--desktop > div img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        object-fit: cover;
+        display: block;
+    }
+
+
+    .g-pdp-images--mobile img{
+        border-radius: 10px;
+        display: block;
+        width: 100%;
+    }
+    /* END PRODUCT IMAGES */
+
+    .g-pdp-content{
+        width: 40%;
+    }
+
+    .g-pdp-content h1{
+        margin: 10px 0 0 0;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 48px;
+    }
+
+    /* PRODUCT CONTENT */
+    .g-ratings-review{
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 3px;
+        background: #fff;
+        border: 0.75px solid #8F7A5E66;
+    }
+
+    .g-ratings-review--stars{
+        display: flex;
+    }
+
+    .g-ratings-review p{
+        margin: 0;
+    }
+
+
+    .g-pdp-icon{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+    }
+    .g-pdp-icon > div{
+        min-width: 39px;
+        width: 39px;
+        height: 39px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .g-pdp-icon > div img{
+        width: 100%;
+    }
+    .g-pdp-icon p{
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 24.42px;
+    }
+
+
+    .g-pdp-pricing{
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .g-pdp-sale,
+    .g-pdp-compare{
+        font-size: 21px;
+        line-height: 30px;
+    }
+
+    .g-pdp-sale{
+        font-weight: 500;
+        color: #000;
+    }
+
+    #price_per_bottle .g-pdp-sale{
+        color: #DC4F39;
+    }
+
+    .g-pdp-compare{
+        color: #00000033;
+        text-decoration: line-through;
+        font-weight: 300;
+    }
+
+    .g-pdp-discount{
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 21.98px;
+        color: #fff;
+        background: #C01315;
+        padding: 11.5px 20px;
+        border-radius: 10px;
+        opacity: 0;
+    }
+
+
+
+    .g-pdp-bundle-wrap{
+        display: flex;
+        gap: 10px;
+    }
+
+    .g-pdp-bundle-wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-top: 20px;
+        border-top: 0.75px solid #0000001A;
+    }
+
+    .g-pdp-bundle{
+        width: 33.333%;
+        padding: 31.5px 19px 19px 19px;
+        border-radius: 7.5px;
+        background-color: #fff;
+        border: 0.75px solid #0000001A;
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .g-pdp-bundle.g-pdp-bundle--selected,
+    .g-pdp-bundle:hover{
+        border: 2px solid #000;
+        background: #F2F5FC;
+    }
+
+    .g-pdp-bundle.g-pdp-bundle--selected .g-pdp-bundle--supply,
+    .g-pdp-bundle:hover .g-pdp-bundle--supply{
+        color: #000;
+    }
+
+    .g-pdp-bundle--image{
+        height: 126px;
+    }
+
+    .g-pdp-bundle--image img{
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .g-pdp-bundle--pack{
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 27px;
+    }
+
+    .g-pdp-bundle--save{
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 14.65px;
+        background-color: #C01315;
+
+        color: #fff;
+        border-radius: 5px;
+        height: 21.6px;
+        display: flex !important;
+        align-items: center;
+    }
+
+    .g-pdp-bundle--save span{
+        padding: 0 5px;
+    }
+
+    .g-pdp-bundle--supply{
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 24px;
+        text-align: center;
+        color: #00000080;
+    }   
+
+    .g-pdp-bundle-wrapper > p{
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        margin: 0;
+        color: #000;
+    }
+
+    .g-pdp-bundle--popular,
+    .g-pdp-bundle--bestvalue{
+        border: 2px solid #000;
+        color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        line-height: 1;
+        position: absolute;
+        top: -21px;
+        min-width: 65%;
+    }
+
+    .g-pdp-bundle--popular{
+        background-color: #C01315;
+    }
+
+    .g-pdp-bundle--bestvalue{
+        background-color: #F2F5FC;
+        color: #000;
+    }
+
+
+    
+    .g-pdp-method{
+        padding: 20px;
+        border: 0.75px solid #000;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.8;
+        position: relative;
+    }
+
+    .g-pdp-method.g-pdp-method-sub{
+        margin-bottom: 10px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+    #supply_days{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 30px;
+        color: #3C3224BF;
+    }
+
+    .g-pdp-method hr{
+        margin: 10px 0 0 0;
+    }
+
+    .g-pdp-method.g-pdp-method--selected{
+        border: 2px solid #000;
+        opacity: 1;
+        background: #fff;
+    }
+
+    .g-pdp-method-content-icon{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 15px;
+    }
+
+    .g-pdp-method-content-icon img{
+        width: 22.5px;
+    }
+
+    .g-pdp-method-header{
+        position: relative;
+        padding-left: 35px;
+    }
+
+    .g-pdp-method.g-pdp-method--selected .g-pdp-header--title{
+        color: #000;
+    }
+
+    .g-pdp-method.g-pdp-method--selected .g-pdp-circle{
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .g-pdp-method.g-pdp-method--selected .g-pdp-circle::before{
+        position: absolute;
+        content: '';
+        min-width: 15px;
+        min-height: 15px;
+        border-radius: 15px;
+        background-color: #000;
+    }
+
+    .g-pdp-header--title,
+    .g-pdp-header--sub{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .g-pdp-header--title{
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 30px;
+        letter-spacing: -0.03em;
+    }
+
+    .g-pdp-header--sub{
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: -0.03em;
+        color: #08122ABF;
+    }
+
+    .g-pdp-circle{
+        width: 27px;
+        height: 27px;
+        border-radius: 27px;
+        border: 1px solid #000;
+        position: absolute;
+        left: 0;
+        top: 2px;
+    }
+
+
+    
+    .g-pdp-cta{
+        padding: 20px 0;
+        margin: 20px 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .g-pdp-cta-stock{
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .g-pdp-cta-stock p{
+        margin: 0;
+    }
+  
+    #stock-status{
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+    }
+
+    .instock{
+        background: #76E953;
+    }
+
+    .outofstock{
+        background: #DF2E26;
+    }
+
+    #stock-date{
+        font-weight: bold;
+    }
+
+    .g-pdp-cta-form form button,
+    .g-pdp-cta-form button{
+        background-color: #3C2D18;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 30px 0;
+        cursor: pointer;
+        border-radius: 3px;
+        width: 100%;
+        border: 0;
+
+        font-size: 21px;
+        font-weight: 500;
+        line-height: 24px;
+        text-transform: uppercase;
+    }
+
+    .g-pdp-cta-form button .g-pdp-sale,
+    .g-pdp-cta-form form button .g-pdp-sale{
+        color: #fff;
+    }
+
+    .g-pdp-cta-form button .g-pdp-compare{
+        color: #FFFFFF66;
+    }
+
+    .g-pdp-cta-moneyback{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+    }
+
+    .g-pdp-cta-moneyback img{
+        width: 24px;
+    }
+
+
+
+    .g-accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .g-accordion-item:first-child {
+        border-top: 1px solid #0000001A;
+    }
+
+    .g-accordion-item {
+        border-bottom: 1px solid #0000001A;
+    }
+
+    .g-accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 30px 30px 0;
+        cursor: pointer;
+    }
+
+    .g-accordion-header > span{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 16px;
+        text-align: left;
+        color: #000;
+    }
+
+    .g-accordion-header svg {
+        transition: transform 0.3s ease;
+    }
+
+    .g-accordion-header.g-active svg {
+        transform: rotate(90deg);
+    }
+
+    .g-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+    }
+
+    .g-accordion-content p{
+        font-size: 18px;
+        line-height: 27px;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .g-accordion-content.open {
+        max-height: 3000px; /* Adjust according to the expected content size */
+        padding: 0 28px 28px 0;
+    }
+
+    .g-accordion-content img{
+        max-width: 100%;
+    }
+
+    .g-accordion-icon{
+        color: #000;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 22px;
+        line-height: 1;
+        font-weight: 300 !important;
+        background: #E2D8C84A;
+    }
+
+    .g-accordion-icon-minus{
+        display: none;
+    }
+
+    .g-accordion-header.g-active .g-accordion-icon-plus{
+        display: none;
+    }
+
+    .g-accordion-header.g-active .g-accordion-icon-minus{
+        display: flex;
+    }
+    /* END PRODUCT CONTENT */
+    
+    .swiper-button-next, .swiper-rtl .swiper-button-prev,
+    .swiper-button-prev, .swiper-rtl .swiper-button-next{
+        background: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        display: flex !important;
+    }
+
+    .swiper-button-next::after, .swiper-button-prev::after{
+        font-size: 12px;
+        color: #000;
+    }
+
+
+    /* UPSELL */
+    .swiper.g-pdp-upsells-slider{
+        padding-bottom: 40px;
+    }
+
+    .g-pdp-upsells{
+        margin-top: 37px;
+    }
+
+    .g-pdp-upsells--navs{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .g-pdp-upsells--navs span{
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .g-pdp-upsells--title{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+
+    .g-pdp-upsells--title > span{
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: 0.36px;
+    }
+
+    .g-pdp-upsell{
+        display: flex;
+        gap: 20px;
+        padding: 10px;
+        border: 1px solid #aaa;
+        border-radius: 8px;
+    }
+
+    .g-pdp-upsell--image{
+        width: 160px;
+        height: 160px;
+    }
+
+    .g-pdp-upsell--image img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #aaa;
+    }
+
+    .g-pdp-upsell--content h3{
+        margin: 0 0 10px 0;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 24px;
+        letter-spacing: 0%;
+    }
+
+    .g-pdp-upsell--content .g-ratings-review{
+        padding: 0;
+    }
+
+    .g-pdp-upsell-pricing span{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        letter-spacing: 0%;
+    }
+
+    .g-pdp-upsell-pricing span.sale{
+        color: #C01315;
+    }
+
+    .g-pdp-upsell-pricing span.compare{
+        color: #2C035566;
+        text-decoration: line-through;
+        font-weight: 500;
+    }
+
+    .g-pdp-upsell-variants{
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .g-pdp-upsell-variants select{
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #D4D4D8;
+        background-color: transparent;
+        border-radius: 5px;
+        color: #27272A;
+    }
+
+    .g-pdp-upsell-atc{
+        padding: 13px 21px;
+        font-weight: 600;
+        font-size: 21px;
+        line-height: 25px;
+        text-align: center;
+        margin-top: 8px;
+        border-radius: 50px;
+        border: 0;
+        cursor: pointer;
+        border: 1.5px solid #1F033C;
+        color: #1F033C;
+        background: #fff;
+    }
+
+    .g-pdp-upsells .swiper-button-disabled{
+        opacity: 0.2;
+    }
+
+    .g-accordion-reviews{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: navajowhite;
+        color: #000;
+        font-size: 18px;
+        padding: 10px 0;
+        border-bottom: 1px solid #0000001A;
+    }
+
+    .g-pdp-icons{
+        border-top: 0.75px solid #26211B59;
+    }
+
+    .g-pdp-method-callout{
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+        text-align: center;
+        color: #FDF7F2;
+        background: #3C2D18;
+        padding: 12px 0;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+    .g-pdp-bottom-note{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        background: #FDF7F2;
+        left: -20px;
+        width: calc(100% + 40px);
+        bottom: -20px;
+        padding: 0 20px;
+    }
+
+    .g-pdp-bottom-note p br{
+        display: none;
+    }
+
+    .g-pdp-bottom-note img{
+        max-width: 94px;
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+    }
+
+    .per_serving{
+        color: #009933;
+    }
+
+    @media only screen and (max-width: 768px) {
+        #supply_days{
+            font-size: 13px;
+            line-height: 18px;    
+        }
+      
+        .g-pdp-bottom-note{
+            left: -10px;
+            width: calc(100% + 20px);
+            bottom: -10px;
+            padding: 0 10px;
+        }
+
+        .g-pdp-bottom-note img{
+            max-width: 50px;
+            right: 10px;
+        }
+
+        .g-pdp-bottom-note p{
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .g-pdp-bottom-note p br{
+            display: inline-block;
+        }
+      
+        .g-pdp-wrapper{
+            padding: 20px;
+        }
+
+        .g-pdp-wrap{
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .g-pdp-content > p,
+        .g-pdp-icon{
+            margin: 10px 0;
+        }
+
+        .g-pdp-bundle-wrapper{
+            padding-top: 0;
+        }
+
+        .g-pdp-images,
+        .g-pdp-content{
+            width: 100%;
+        }
+
+        .g-pdp-images--desktop{
+            display: none;
+        }
+
+        .g-pdp-images--mobile{
+            display: block;
+        }
+
+        .g-pdp-icon > div{
+            width: 26px;
+            min-width: 26px;
+            height: 26px;
+            min-width: 26px;
+        }
+
+        .g-pdp-icon > div img{
+            width: 16px;
+        }
+
+        .g-pdp-icon p{
+            font-size: 13px;
+        }
+
+        .g-pdp-sale, .g-pdp-compare{
+            font-size: 18px;
+            line-height: 21px;
+        }
+
+        .g-pdp-discount{
+            font-size: 12px;
+            padding: 3px 9px;
+        }
+
+        .g-pdp-pricing{
+            padding: 10px 0;
+        }
+
+        .g-pdp-bundle-wrapper > p, .g-pdp-bundle--pack, .g-pdp-header--title, .g-pdp-cta-moneyback{
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .g-pdp-bundle--pack{
+            font-weight: bold;
+        }
+
+        .g-pdp-bundle{
+            padding: 10px;
+            gap: 5px;
+        }
+
+        .g-pdp-bundle--supply{
+            font-size: 11px;
+            line-height: 14px;
+        }
+        .g-pdp-header--sub, .g-pdp-cta-stock, .g-accordion-content p{
+            font-size: 12px;
+            line-height: 14px;
+        }
+
+        .g-pdp-bundle--save{
+            height: unset;
+            padding: 5px 0;
+        }
+
+        .g-pdp-bundle--image{
+            height: 84px;
+        }
+
+        .g-pdp-bundle--popular, .g-pdp-bundle--bestvalue{
+            font-size: 12px;
+            padding: 6px;
+            border-radius: 5px;
+            top: -14px;
+        }
+
+        .g-pdp-method{
+            padding: 10px
+        }
+
+        .g-pdp-circle{
+            width: 18px;
+            height: 18px;
+        }
+
+        .g-pdp-method.g-pdp-method--selected .g-pdp-circle::before{
+            min-width: 10px;
+            min-height: 10px;
+        }
+
+        .g-pdp-method-header{
+            padding-left: 25px;
+        }
+
+        .g-pdp-header--title {
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        .g-pdp-method-content-icon, .g-accordion-header > span{
+            font-size: 14px;
+        }
+
+        .g-pdp-cta{
+            padding: 10px 0;
+            margin: 0;
+            gap: 10px;
+        }
+
+        .g-pdp-cta-stock{
+            margin-bottom: 0;
+        }
+
+        .g-cta-bottom{
+            padding: 0;
+        }
+
+        .g-pdp-wrapper .product-form__buttons button{
+            padding: 20px 0;
+        }
+
+        .g-pdp-cta-form button{
+            font-size: 16px;
+            line-height: 16px;
+            padding: 20px 0;
+        }
+
+        .g-accordion-header{
+            padding: 12px;
+        }
+
+        .g-accordion-content.open{
+            padding: 0 12px;
+        }
+
+        .g-accordion{
+            gap: 10px;
+        }
+
+        .g-pdp-content h1{
+            font-size: 26px;
+            line-height: 31px;
+        }
+
+        .g-ratings-review{
+            padding: 5px;
+        }
+
+        .g-ratings-review p{
+            font-size: 14px;
+        }
+
+        .g-accordion-reviews{
+            font-size: 14px;
+            padding: 0 12px 12px 12px;
+        }
+
+        .g-ratings-review--stars svg{
+            width: 17px;
+        }
+
+        .g-pdp-upsell--content h3, .g-pdp-upsell-pricing span{
+            font-size: 16px;
+            line-height: 19px;
+        }
+
+        .g-pdp-upsell-atc{
+            font-size: 12px;
+            line-height: 17px;
+        }
+
+        .g-pdp-upsell--image{
+            height: auto;
+            min-width: 112px;
+        }
+
+
+        .g-pdp-images--mobile .swiper-slide{
+            height: 320px;
+        }
+
+        .g-pdp-images--mobile .swiper-slide img{
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+    }
+</style>
+{% if section.settings.product != blank %}
+  {% assign product = section.settings.product %}
+{% endif %}
+<div id="product" style="margin-top: -80px;position: absolute;display: block"></div>
+<div class="g-pdp-wrapper" name="product">
+    <div class="g-wrap">
+
+        <div class="g-pdp-wrap">
+            <div class="g-pdp-images">
+                <div class="swiper g-pdp-images--mobile">
+                    <div class="swiper-wrapper">
+                        {% for image in product.images %}
+                        <div class="swiper-slide">
+                            <img src="{{ image | image_url: width: "800px" }}" alt="" width="" height="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Navigation buttons -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+
+
+                <!-- Thumbnail Slider -->
+                <style>
+                  .g-pdp-thumbnails{
+                     margin-top: 10px;
+                     {% if section.settings.show_thumbnail == false %}display: none{% endif %}
+                  }
+                  .g-pdp-thumbnails .swiper-slide {
+                      cursor: pointer;
+                      opacity: 0.6;
+                  }
+                  
+                  .g-pdp-thumbnails .swiper-slide-thumb-active {
+                      opacity: 1;
+                  }
+
+                  .g-pdp-thumbnails .swiper-slide img{
+                      object-fit: cover;
+                      width: 100%;
+                      height: 100%;
+                      display: block;
+                  }
+                </style>
+                <div class="swiper g-pdp-thumbnails">
+                    <div class="swiper-wrapper">
+                        {% for image in product.images %}
+                        <div class="swiper-slide">
+                            <img src="{{ image | image_url: width: "300px" }}" alt="" width="" height="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                    {% when 'review_widget' %}
+                      {% render 'mms-adv-review-widget', block: block %}
+                  {% endcase %}
+                {% endfor %}
+            </div>
+            <div class="g-pdp-content">
+
+                <div class="g-ratings-review">
+                    <div class="g-ratings-review--stars">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                    </div>
+                    <p>{{ section.settings.rev_text }}</p>
+                </div>
+
+                <h1>{{ product.title }}</h1>
+                {{ section.settings.ctm_description }}
+                
+                <div class="g-pdp-icons">
+                    {% for block in section.blocks %}
+                    {% case block.type %}
+                        {% when 'icon-text' %}
+                        <div class="g-pdp-icon">
+                            <div>
+                                <img src="{{ block.settings.icon | image_url: width: "200px" }}" alt="" width="" height="">
+                            </div>
+                            {{ block.settings.title }}
+                        </div>
+                    {% endcase %}
+                    {% endfor %}
+                </div>
+
+                {% assign default_sale_price = product.price %}
+                {% assign default_compare_price = product.compare_at_price %}
+
+                {% if product.selling_plan_groups.size > 0 %}
+                  {% if product.variants.size > 1 %}
+                      {% if product.variants[1].selling_plan_allocations.size > 0 %}
+                        {% assign default_sale_price = product.variants[1].selling_plan_allocations.first.price_adjustments.first.price %}
+                        {% assign default_compare_price = product.variants[1].compare_at_price %}
+                      {% else %}
+                        {% assign default_sale_price = product.variants[1].price %}
+                        {% assign default_compare_price = product.variants[1].compare_at_price %}
+                      {% endif %}
+                  {% else %}
+                      {% if product.selected_or_first_available_variant.selling_plan_allocations.size > 0 %}
+                        {% assign default_sale_price = product.selected_or_first_available_variant.selling_plan_allocations.first.price_adjustments.first.price %}
+                        {% assign default_compare_price = product.selected_or_first_available_variant.price %}
+                      {% else %}
+                        {% assign default_sale_price = product.selected_or_first_available_variant.price %}
+                        {% assign default_compare_price = product.selected_or_first_available_variant.compare_at_price %}
+                      {% endif %}
+                  {% endif %}
+                {% endif %}
+
+                <div class="g-pdp-bundle-wrapper"{% if product.selling_plan_groups.size == 0 %} style="display: none"{% endif %}>
+                    <div class="g-pdp-methods">
+                        <div class="g-pdp-method-callout">{{ section.settings.callout_text }}</div>
+                        <div class="g-pdp-method g-pdp-method--selected g-pdp-method-sub" 
+                          data-sp="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" 
+                          data-method="subscription"
+                          data-sale-ot="{{ product.price | money }}" 
+                          data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" 
+                          data-compare="{{ product.price | money }}"
+                        >
+                            <div class="g-pdp-method-header">
+                                <span class="g-pdp-circle"></span>
+                                <div class="g-pdp-header--title">
+                                    <span>Subscribe & Save</span>
+                                    <!-- <span id="price_per_bottle">
+                                    {% if product.variants.size > 1 %}
+                                        {{ product.variants[1].selling_plan_allocations.first.price_adjustments.first.price | divided_by: 2 | money }}
+                                    {% else %}
+                                        {{ product.selected_or_first_available_variant.selling_plan_allocations.first.price_adjustments.first.price | money }}
+                                    {% endif %} per bottle</span> -->
+                                    <span id="price_per_bottle">
+                                        <span class="g-pdp-sale">{{ default_sale_price | money }}</span>
+                                        <span class="g-pdp-compare">{{ default_compare_price | money }}</span>
+                                    </span>
+                                </div>
+                                <div class="g-pdp-header--sub">
+                                    <span id="supply_days">Daily application for 1 person</span>
+                                    <span id="per_serving">{{ section.settings.app_per_day }}</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="g-pdp-method-content">
+                                {% for block in section.blocks %}
+                                {% case block.type %}
+                                    {% when 'usps' %}
+                                    <div class="g-pdp-method-content-icon">
+                                        <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
+                                        <span>{{ block.settings.usp_text }}</span>
+                                    </div>
+                                {% endcase %}
+                                {% endfor %}
+                            </div>
+                            {% if section.settings.show_limited_edition == true %}
+                              <div class="g-pdp-bottom-note">
+                                {{ section.settings.limited_edition }}
+                                <img src="{{ section.settings.limited_edition_image | image_url: width: "1000px" }}" alt="" width="" height="">
+                              </div>
+                            {% endif %}
+                        </div>
+                        <div class="g-pdp-method" data-sp="" data-method="onetime" data-sale-ot="{{ product.price | money }}" data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" data-compare="{{ product.compare_at_price | money }}">
+                            <div class="g-pdp-method-header">
+                                <span class="g-pdp-circle"></span>
+                                <div class="g-pdp-header--title">
+                                    <span>One time purchase</span>
+                                    <span id="price_per_bottle">
+                                        <span class="g-pdp-sale">{{ product.price | money }}</span>
+                                    </span>
+                                </div>
+                                <div class="g-pdp-header--sub">
+                                    <span class="per_serving">{{ section.settings.ot_callout_text }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="g-pdp-cta">
+                    {% if section.settings.show_ctm_limited == true %}
+                      <!-- NEW CTA -->
+                      <style>
+                          .{{ section.id }}.g-cta-limited{
+                              justify-content: center;
+                              padding-bottom: 10px;
+                          }
+                        
+                          .{{ section.id }} .g-cta-limited-circle{
+                              position: relative;
+                              background: #F28F3B1A;
+                              width: 25px;
+                              height: 25px;
+                              border-radius: 25px;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                          }
+          
+                          .{{ section.id }} .g-cta-limited-circle::before{
+                              box-sizing: border-box;
+                              width: 21px;
+                              height: 21px;
+                              border-radius: 21px;
+                              background: #F28F3B66;
+                              content: '';
+                              position: absolute;
+                          }
+          
+                          .{{ section.id }} .g-cta-limited-circle-sub{
+                              position: relative;
+                              background: #F28F3BA6;
+                              width: 15px;
+                              height: 15px;
+                              border-radius: 15px;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                          }
+          
+                          .{{ section.id }} .g-cta-limited-circle-sub::before{
+                              box-sizing: border-box;
+                              width: 11px;
+                              height: 11px;
+                              border-radius: 11px;
+                              background: #F28F3B;
+                              content: '';
+                              position: absolute;
+                          }
+          
+                          @media only screen and (max-width: 768px) {
+                              .{{ section.id }} .g-cta-limited{
+                                  justify-content: center;
+                              }
+                          }
+                      </style>
+                      <div class="{{ section.id }} g-cta-limited">
+                          <span class="g-cta-limited-circle">
+                              <span class="g-cta-limited-circle-sub"></span>
+                          </span>
+                          {{ section.settings.cta_limited }}
+                      </div>
+                      <!-- END NEW CTA -->
+                    {% else %}
+                      <div class="g-pdp-cta-stock">
+                          <span id="stock-status" class="{% if product.available %}instock{% else %}outofstock{% endif %}"></span>
+                          {% if product.available %}
+                            <p>In stock - Available for delivery</p>
+                          {% else %}
+                            <p>Out of stock - Not Available for delivery</p>
+                          {% endif %}
+                      </div>
+                      <script>
+                      document.addEventListener("DOMContentLoaded", function () {
+                          function addDaysToDate() {
+                              const days = 14;
+                              let dateElement = document.getElementById("stock-date");
+                              if (dateElement) {
+                                  let currentDate = new Date();
+                                  currentDate.setDate(currentDate.getDate() + days);
+                                  
+                                  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                  dateElement.textContent = currentDate.toLocaleDateString('en-US', options);
+                              }
+                          }
+                          
+                          addDaysToDate();
+                      });
+                      </script>
+                    {% endif %}
+
+                    <!-- <form class="g-pdp-cta-form">
+                        <input type="hidden" id="selling_plan" value="">
+                        <button type="button">
+                            <span>Add To Cart</span> - 
+                            <span class="g-pdp-sale">{{ default_sale_price | money }}</span>
+                            <span class="g-pdp-compare">{{ default_compare_price | money }}</span>
+                        </button>
+                    </form> -->
+
+                    {%- assign product_form_id = 'product-form-' | append: section.id -%}
+                    {%- for block in section.blocks -%}
+                      {%- case block.type -%}
+                        {%- when '@app' -%}
+                          {% render block %}
+                        {%- when 'buy_buttons' -%}
+                          {%- render 'buy-buttons',
+                            block: block,
+                            product: product,
+                            product_form_id: product_form_id,
+                            section_id: section.id,
+                            show_pickup_availability: true
+                          -%}
+                      {%- endcase -%}
+                    {%- endfor -%}
+                    
+                    <div class="g-cta-bottom">
+                        {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                        <div>
+                            <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                            <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                        </div>
+                        {% endif %}
+                        {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                        <div>
+                            <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                            <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                        </div>
+                        {% endif %}
+                    </div> 
+                  <lightlabs-widget company-id="112"></lightlabs-widget>
+                </div>
+
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                      {% when 'pdp_col_icons' %}
+                        {% render 'mms-pdp-icons', block: block %}
+                  {% endcase %}
+                {% endfor %}
+
+                <div class="g-accordion">
+                    {% if section.settings.accord_title_1 != blank %}
+                    <div class="g-accordion-item">
+                      <div class="g-accordion-header g-active">
+                          <span>{{ section.settings.accord_title_1 }}</span>
+                          <span class="g-accordion-icon g-accordion-icon-plus">+</span>
+                          <span class="g-accordion-icon g-accordion-icon-minus">-</span>
+                      </div>
+                      <div class="g-accordion-content open">
+                          {{ product.description }}
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if section.settings.accord_title_2 != blank %}
+                    <div class="g-accordion-item">
+                      <div class="g-accordion-header">
+                          <span>{{ section.settings.accord_title_2 }}</span>
+                          <span class="g-accordion-icon g-accordion-icon-plus">+</span>
+                          <span class="g-accordion-icon g-accordion-icon-minus">-</span>
+                      </div>
+                      <div class="g-accordion-content">
+                          {{ section.settings.accord_content_2 }}
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if section.settings.accord_title_3 != blank %}
+                    <div class="g-accordion-item">
+                      <div class="g-accordion-header">
+                          <span>{{ section.settings.accord_title_3 }}</span>
+                          <span class="g-accordion-icon g-accordion-icon-plus">+</span>
+                          <span class="g-accordion-icon g-accordion-icon-minus">-</span>
+                      </div>
+                      <div class="g-accordion-content">
+                          <img src="{{ section.settings.accord_content_3 | image_url: width: "1980px" }}" alt="" width="" height="">
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if section.settings.accord_title_4 != blank %}
+                    <div class="g-accordion-item">
+                      <div class="g-accordion-header">
+                          <span>{{ section.settings.accord_title_4 }}</span>
+                          <span class="g-accordion-icon g-accordion-icon-plus">+</span>
+                          <span class="g-accordion-icon g-accordion-icon-minus">-</span>
+                      </div>
+                      <div class="g-accordion-content">
+                          {{ section.settings.accord_content_4 }}
+                      </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+                
+                <script>
+                    // Select all accordion headers
+                    const headers = document.querySelectorAll('.g-accordion-header');
+                
+                    headers.forEach(header => {
+                      header.addEventListener('click', () => {
+                          const content = header.nextElementSibling;
+                  
+                          // Toggle active class for the header
+                          header.classList.toggle('g-active');
+                  
+                          // Show or hide the content with smooth transition
+                          if (content.classList.contains('open')) {
+                            content.classList.remove('open');
+                          } else {
+                            content.classList.add('open');
+                          }
+                      });
+                    });
+                </script>
+
+                        
+            </div>
+        </div>
+
+    </div>
+    <script type="application/ld+json">
+      {{ product | structured_data }}
+    </script>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const thumbnailSwiper = new Swiper('.g-pdp-thumbnails', {
+            slidesPerView: 5, // Adjust this based on your layout
+            spaceBetween: 10,
+            freeMode: true,
+            watchSlidesProgress: true,
+            watchSlidesVisibility: true
+        });
+      
+        const pdpSwiperInstance = new Swiper('.g-pdp-images--mobile', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: thumbnailSwiper
+            }
+        });
+
+
+        // document.querySelector(".g-pdp-cta-form button").addEventListener("click", function(){
+        //     const sp = document.querySelector("#selling_plan").value;
+        //     const vid = document.querySelector(".g-pdp-bundle--selected").getAttribute("data-vid");
+        
+        //     fetch("/cart/add.js", {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({
+        //             id: vid,
+        //             quantity: 1,
+        //             selling_plan: sp
+        //         })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //     console.log("Added to cart:", data);
+        //     window.location.href = "/cart";
+        //     })
+        //     .catch(error => console.error("Error:", error)); 
+        // });
+
+
+        document.querySelectorAll(".g-pdp-upsell-atc").forEach(upsells => {
+        upsells.addEventListener("click", function(){
+            const vid = this.getAttribute("data-vid");
+
+            fetch("/cart/add.js", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: vid,
+                    quantity: 1
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+            console.log("Added to cart:", data);
+            window.location.href = "/cart";
+            })
+            .catch(error => console.error("Error:", error)); 
+        });
+        });
+
+        const bundles = document.querySelectorAll(".g-pdp-bundle");
+        bundles.forEach(bundle => {
+            bundle.addEventListener("click", function(){
+                bundles.forEach(b => b.classList.remove("g-pdp-bundle--selected"));
+
+                this.classList.add("g-pdp-bundle--selected");
+
+                const sp = this.getAttribute("data-sp");
+                const vid = this.getAttribute("data-vid");
+                let sale = this.getAttribute("data-sale");
+                let compare = this.getAttribute("data-compare-ot");
+                let save = "";
+            
+                const per_bottle = this.getAttribute("data-per-bottle");
+                const per_serving = this.getAttribute("data-per-serving");
+                const supply = this.querySelector(".g-pdp-bundle--supply").innerHTML;
+
+                document.querySelector(".g-pdp-method-sub").setAttribute("data-sp", sp);
+                document.querySelector("#selling_plan").value = sp;
+                //document.querySelector("input.product-variant-id").value = vid;
+                document.querySelector("#price_per_bottle").innerHTML = `${per_bottle} per bottle`;
+                document.querySelector("#per_serving").innerHTML = `${per_serving} Per Serving`;
+                document.querySelector("#supply_days").innerHTML = supply;
+
+
+                const method = document.querySelector(".g-pdp-method--selected").getAttribute("data-method");
+                if(method === "onetime"){
+                  sale = this.getAttribute("data-sale-ot");
+                  compare = this.getAttribute("data-compare-ot");
+                }
+
+                document.querySelectorAll(".g-pdp-sale").forEach(saleElement => {
+                  saleElement.innerHTML = sale;
+                });
+
+                document.querySelectorAll(".g-pdp-compare").forEach(compareElement => {
+                  compareElement.innerHTML = compare;
+                });
+            
+                if(sale === compare)
+                  document.querySelectorAll(" .g-pdp-compare").forEach(compareElement => {
+                      compareElement.style.display = "none";
+                      document.querySelector(".g-pdp-discount").style.display = "none";
+                  });
+                else{
+                  document.querySelector(".g-pdp-discount").style.display = "flex";
+                  let currencySymbol = sale.trim().charAt(0);
+                  
+                  let salePrice = parseFloat(sale.replace(currencySymbol, ""));
+                  let comparePrice = parseFloat(compare.replace(currencySymbol, ""));
+                  let savingsDisplay = document.querySelector(".g-pdp-discount");
+              
+                  // Check if values are valid numbers
+                  if (!isNaN(salePrice) && !isNaN(comparePrice)) {
+                      let savings = comparePrice - salePrice;
+                      savingsDisplay.textContent = `Save ${currencySymbol}${savings.toFixed(2)}`;
+                      savingsDisplay.display = "flex";
+                  } else {
+                      savingsDisplay.display = "none";
+                  }
+                  
+                  document.querySelectorAll(".g-pdp-compare").forEach(compareElement => {
+                      compareElement.style.display = "block"
+                  });
+                }
+            });
+        });
+
+        const methods = document.querySelectorAll(".g-pdp-method");
+        methods.forEach(method => {
+            method.addEventListener("click", function(){
+                methods.forEach(m => m.classList.remove("g-pdp-method--selected"));
+
+                this.classList.add("g-pdp-method--selected");
+                const sp = this.getAttribute("data-sp");
+                document.querySelectorAll(".selling_plan").forEach(sellingplan => {
+                  sellingplan.value = sp;
+                });
+
+                const method = this.getAttribute("data-method");
+                //const selected_bundle = document.querySelector(".g-pdp-bundle--selected");
+
+                let sale = "";
+                let compare = "";
+            
+                if(method === "onetime"){
+                  sale = this.getAttribute("data-sale-ot");
+                  compare = this.getAttribute("data-compare");
+                }else{
+                  sale = this.getAttribute("data-sale");
+                  compare = this.getAttribute("data-compare");
+                }
+
+                document.querySelectorAll(".product-form .g-pdp-sale").forEach(saleElement => {
+                  saleElement.innerHTML = sale;
+                });
+
+                document.querySelectorAll(".product-form .g-pdp-compare").forEach(compareElement => {
+                  compareElement.innerHTML = compare;
+                });
+
+                {% comment %}
+                if(sale === compare)
+                  document.querySelectorAll(".g-pdp-compare").forEach(compareElement => {
+                      compareElement.style.display = "none";
+                      document.querySelector(".g-pdp-discount").style.display = "none";
+                  });
+                else{
+                  document.querySelector(".g-pdp-discount").style.display = "flex";
+                  let currencySymbol = sale.trim().charAt(0);
+                  
+                  let salePrice = parseFloat(sale.replace(currencySymbol, ""));
+                  let comparePrice = parseFloat(compare.replace(currencySymbol, ""));
+                  let savingsDisplay = document.querySelector(".g-pdp-discount");
+              
+                  // Check if values are valid numbers
+                  if (!isNaN(salePrice) && !isNaN(comparePrice)) {
+                      let savings = comparePrice - salePrice;
+                      savingsDisplay.textContent = `Save ${currencySymbol}${savings.toFixed(2)}`;
+                      savingsDisplay.display = "flex";
+                  } else {
+                      savingsDisplay.display = "none";
+                  }
+  
+                  document.querySelectorAll(".g-pdp-compare").forEach(compareElement => {
+                      compareElement.style.display = "block"
+                  });
+                }
+                {% endcomment %}
+            });
+        });
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "MMS Product Information",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Select a Product"
+      },
+      {
+        "type": "textarea",
+        "id": "rev_text",
+        "label": "Reviewer Widget Text"
+      },
+      {
+        "type": "richtext",
+        "id": "ctm_description",
+        "label": "Custom Description"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_thumbnail",
+        "label": "Show Image Thumbnails",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_limited_edition",
+        "label": "Show Limited Edition",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "limited_edition",
+        "label": "Limited Edition Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "limited_edition_image",
+        "label": "Limited Edition Image"
+      },
+      {
+        "type": "header",
+        "content": "Dropdowns"
+      },
+      {
+        "type": "text",
+        "id": "accord_title_1",
+        "label": "Dropdown Default Description"
+      },
+      {
+        "type": "text",
+        "id": "accord_title_2",
+        "label": "Dropdown Title 2"
+      },
+      {
+        "type": "richtext",
+        "id": "accord_content_2",
+        "label": "Dropdown Content 2"
+      },
+      {
+        "type": "text",
+        "id": "accord_title_3",
+        "label": "Dropdown Title 3"
+      },
+      {
+        "type": "richtext",
+        "id": "accord_content_3",
+        "label": "Dropdown Content 3"
+      },
+      {
+        "type": "text",
+        "id": "accord_title_4",
+        "label": "Dropdown Title 4"
+      },
+      {
+        "type": "richtext",
+        "id": "accord_content_4",
+        "label": "Dropdown Content 4"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_ctm_limited",
+        "label": "Show Custom Limitted"
+      },
+      {
+        "type": "richtext",
+        "id": "cta_limited",
+        "label": "Custom Limitted Text"
+      },
+      {
+        "type": "color",
+        "id": "cta_bg",
+        "label": "CTA Background"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Text Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_1",
+        "label": "CTA Bottom Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_1",
+        "label": "CTA Bottom Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_2",
+        "label": "CTA Bottom Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_2",
+        "label": "CTA Bottom Text 2"
+      },
+      {
+        "type": "header",
+        "content": "Call Out"
+      },
+      {
+        "type": "text",
+        "id": "callout_text",
+        "label": "Call Out Text"
+      },
+      {
+        "type": "text",
+        "id": "ot_callout_text",
+        "label": "Onetime Out Text",
+        "default": "Extra 10% Off with Code: SOS ($43.20)"
+      },
+      {
+        "type": "header",
+        "content": "Other Labels"
+      },
+      {
+        "type": "text",
+        "id": "app_per_day",
+        "label": "Application per day",
+        "default": "$1.20 / day"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "pdp_col_icons",
+        "name": "PDP Icons",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon_1",
+            "label": "Icon 1"
+          },
+          {
+            "type": "text",
+            "id": "text_1",
+            "label": "Text 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_2",
+            "label": "Icon 2"
+          },
+          {
+            "type": "text",
+            "id": "text_2",
+            "label": "Text 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_3",
+            "label": "Icon 3"
+          },
+          {
+            "type": "text",
+            "id": "text_3",
+            "label": "Text 3"
+          }
+        ]
+      },
+      {
+        "type": "review_widget",
+        "name": "Review Widget",
+        "settings": [
+          {
+            "type": "text",
+            "id": "rev_text_1",
+            "label": "Review Text 1"
+          },
+          {
+            "type": "text",
+            "id": "rev_name_1",
+            "label": "Review Name 1"
+          },
+          {
+            "type": "text",
+            "id": "rev_text_2",
+            "label": "Review Text 2"
+          },
+          {
+            "type": "text",
+            "id": "rev_name_2",
+            "label": "Review Name 2"
+          },
+          {
+            "type": "text",
+            "id": "rev_text_3",
+            "label": "Review Text 3"
+          },
+          {
+            "type": "text",
+            "id": "rev_name_3",
+            "label": "Review Name 3"
+          }
+        ]
+      },
+      {
+        "type": "buy_buttons",
+        "name": "t:sections.main-product.blocks.buy_buttons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_dynamic_checkout",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_gift_card_recipient",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_prices",
+            "default": false,
+            "label": "Show Price and Compare Price"
+          }
+        ]
+      },
+      {
+        "type": "icon-text",
+        "name": "Icons",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          },
+          {
+            "type": "richtext",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      },
+      {
+        "type": "usps",
+        "name": "USPs",
+        "settings": [
+            {
+              "type": "image_picker",
+              "id": "usp_icon",
+              "label": "USP Icon"
+            },
+            {
+              "type": "text",
+              "id": "usp_text",
+              "label": "USP Text"
+            }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Product Information"
+      }
+    ]
+  }
+{% endschema %}
+
+

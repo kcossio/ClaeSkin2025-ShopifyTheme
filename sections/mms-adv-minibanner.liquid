@@ -1,0 +1,178 @@
+<style>
+    .g-mini-banner{
+        padding: 20px;
+    }
+
+    .g-mini-banner-wrap{
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #3C2D18;
+        border-radius: 23px;
+        position: relative;
+    }
+    
+    .g-mb-content{
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 50%;
+    }
+
+    .g-mb-content h2,
+    .g-mb-content p{
+        color: #fff;
+        margin: 0;
+    }
+
+    .g-mb-content h2{
+        font-weight: 500;
+        font-size: 38px;
+        line-height: 110.00000000000001%;
+    }
+
+    .g-mb-content p{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+    }
+    
+    .g-mb-content a{
+        background: #fff;
+        color: #3C2D18;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 24px;
+        padding: 17px 0;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .g-mb-content .g-cta-bottom{
+        padding: 0;
+    }
+
+    .g-mb-content .g-cta-bottom > div span{
+        color: #fff;
+    }
+
+    .g-mb-content .g-cta-bottom > div svg{
+        color: #fff;
+    }   
+
+    .freehand{
+        position: absolute;
+        top: 0;
+        object-fit: cover;
+        height: 100%;
+        width: 50%;
+        right: 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .g-mb-content{
+            width: 100%;
+            padding: 20px 10px 0 10px;
+        }
+
+        .g-mini-banner-mobile{
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .freehand{
+            width: 121%;
+            object-fit: cover;
+            height: 100%;
+            object-position: center;
+            top: -20px;
+            right: -9%;
+        }
+        
+        .g-mb-content h2{
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .g-mb-content p{
+            font-size: 14px;
+            text-align: center;
+            line-height: 120%;
+        }
+
+        .g-mb-content a{
+            font-size: 19px;
+            padding: 12px 0;
+        }
+    }
+</style>
+<div class="g-mini-banner">
+    <div class="g-mini-banner-wrap">
+        <div class="g-mb-content">
+            <h2>{{ section.settings.title }}</h2>
+            <p>{{ section.settings.subtitle }}</p>
+            <a href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }}</a>
+            <div class="g-cta-bottom">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                    </svg>
+                    <span>{{ section.settings.cta_bottom_text }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="g-mini-banner-mobile">
+            <img src="{{ section.settings.image | image_url: width: "2000px" }}" class="freehand" width="" height="" alt="">
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS ADV Minibanner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text",
+        "default": "Get Your Super Tallow Now"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text",
+        "label": "Bottom Link Text",
+        "default": "30 day money back guarantee"
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "MMS ADV Minibanner"
+      }
+    ]
+  }
+{% endschema %}

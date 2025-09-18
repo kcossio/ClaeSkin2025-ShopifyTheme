@@ -1,0 +1,349 @@
+<style>
+    .g-cq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 26px 0;
+        cursor: pointer;
+    }
+
+    .g-cq-header > span{
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 24px;
+        text-align: left;
+    }
+
+    .g-cq-header svg {
+        transition: transform 0.3s ease;
+    }
+
+    .g-cq-header.g-active svg {
+        transform: rotate(45deg);
+    }
+
+    .g-cq-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0 10px;
+    }
+
+    .g-cq-content p{
+        font-size: 18px;
+        line-height: 27px;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .g-cq-content.open {
+        max-height: 3000px; /* Adjust according to the expected content size */
+        padding: 0 28px 28px 28px;
+    }
+
+    .g-cq-icon{
+        color: #000;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        line-height: 1;
+        background: #E2D8C84A;
+        padding: 5px;
+    }
+
+    .g-common-questions-wrap{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .g-common-question{
+        width: calc(50% - 20px);
+        border-top: 1px solid #26211B59;
+        border-bottom: 1px solid #26211B59;
+    }
+
+    .g-common-questions{
+        padding: 50px 20px;
+        background: {{ section.settings.bg }};
+    }
+
+    .g-common-questions h2{
+        font-size: 40px;
+        font-weight: 550;
+        line-height: 28px;
+        text-align: center;
+        margin: 20px 0 50px 0;
+    }
+
+    .g-common-questions .g-wrap{
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .g-common-questions .g-cta{
+        margin-top: 50px;
+    }
+
+    /* .g-common-questions .g-cta a{
+
+    } */
+
+    @media only screen and (max-width: 1024px) {
+        .g-common-questions{
+            padding: 20px;
+        }
+
+        .g-common-questions h2{
+            font-size: 24px;
+            line-height: 28px;
+        }
+
+        .g-cq-header > span{
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        .g-cq-header{
+            padding: 13px;
+        }
+
+        .g-cq-content.open{
+            padding: 0 13px 13px 13px;
+        }
+
+        .g-cq-content p{
+            font-size: 13px;
+            line-height: 15px;
+        }
+
+        .g-cq-icon svg{
+            width: 18px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-common-questions-wrap{
+            flex-direction: column;
+        }
+
+        .g-common-question{
+            width: 100%;
+        }
+    }
+</style>
+<div class="g-common-questions">
+    <div class="g-wrap">
+        <h2>{{ section.settings.title }}</h2>
+        <div class="g-common-questions-wrap">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'block' -%}
+                  <div class="g-common-question">
+                      <div class="g-cq-header">
+                          <span>{{ block.settings.question }}</span>
+                          <span class="g-cq-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                              </svg>
+                          </span>
+                      </div>
+                      <div class="g-cq-content">
+                          {{ block.settings.answer }}
+                      </div>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+        </div>
+        <div class="g-cta">
+            {%- assign product_form_id = 'product-form-' | append: section.id -%}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'link_button' -%}
+                  <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+                  <div class="g-cta-bottom">
+                      {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                      </div>
+                      {% endif %}
+                      {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                      </div>
+                      {% endif %}
+                  </div>
+                {%- when 'buy_buttons' -%}
+                  {%- render 'buy-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id,
+                    show_pickup_availability: true
+                  -%}
+                  <div class="g-cta-bottom">
+                      {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                      </div>
+                      {% endif %}
+                      {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                      </div>
+                      {% endif %}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+<script>
+    // Select all accordion headers
+    const cqheaders = document.querySelectorAll('.g-cq-header');
+
+    cqheaders.forEach(header => {
+    header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+
+        // Toggle active class for the header
+        header.classList.toggle('g-active');
+
+        // Show or hide the content with smooth transition
+        if (content.classList.contains('open')) {
+        content.classList.remove('open');
+        } else {
+        content.classList.add('open');
+        }
+    });
+    });
+</script>
+                                  
+{% schema %}
+  {
+    "name": "MMS Questions",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#FDF7F2"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA URL"
+      },
+      {
+        "type": "color",
+        "id": "cta_bg",
+        "label": "CTA Background"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Text Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_1",
+        "label": "CTA Bottom Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_1",
+        "label": "CTA Bottom Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_2",
+        "label": "CTA Bottom Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_2",
+        "label": "CTA Bottom Text 2"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "buy_buttons",
+        "name": "t:sections.main-product.blocks.buy_buttons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_dynamic_checkout",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_gift_card_recipient",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_prices",
+            "default": false,
+            "label": "Show Price and Compare Price"
+          }
+        ]
+      },
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "question",
+            "label": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "answer",
+            "label": "Answer"
+          }
+        ]
+      },
+      {
+        "type": "link_button",
+        "name": "Link Button",
+        "settings": [
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Questions"
+      }
+    ]
+  }
+{% endschema %}

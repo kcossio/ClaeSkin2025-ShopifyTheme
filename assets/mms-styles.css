@@ -1,0 +1,97 @@
+.g-wrap{
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.g-mobile{
+    display: none;
+}
+
+
+/* CTA */
+.g-cta {
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 550px;
+}
+.g-cta a,
+.g-cta button{
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 24px;
+    text-decoration: none;
+    padding: 22px 44px;
+    background: #3C2D18;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.1s ease-out;
+}
+
+.g-cta button{
+    border: 0;
+    cursor: pointer;
+}
+
+
+.g-cta a:hover,
+.g-cta button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 5px #000;
+}
+
+.g-cta-bottom{
+    padding: 20px 0;
+    margin: 20px 0;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.g-cta-bottom > div{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+.g-cta-bottom > div span{
+    font-size: 17px;
+    line-height: 24px;
+}
+
+.g-cta-bottom svg,
+.g-cta-bottom img{
+    max-width: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+@media only screen and (max-width: 1440px) {
+    
+}
+
+@media only screen and (max-width: 1024px) {
+    
+}
+
+@media only screen and (max-width: 768px) {
+    .g-cta a{
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .g-cta-bottom > div span{
+        font-size: 15px;
+        line-height: 21px;
+    }
+}

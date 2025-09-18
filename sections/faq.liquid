@@ -1,0 +1,98 @@
+{%- # Label: Title -%}
+{{ section.settings.title }}
+
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'faq' -%}
+      {%- # Label: Question -%}
+      {{ block.settings.question }}
+
+      {%- # Label: Answer -%}
+      {{ block.settings.answer }}
+  {%- endcase -%}
+{%- endfor -%}
+
+<div class="page-width">
+  <div class="faq__wrapper">
+    {%- if section.settings.title -%}
+      <div class="faq__title">
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+    {%- endif -%}
+    <div class="faq__content">
+      {%- for block in section.blocks -%}
+        <div class="faq__item">
+          <h3 class="faq__question">{{ block.settings.question }}</h3>
+          <div class="faq__answer">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const faqItems = document.querySelectorAll('.faq__item');
+
+    faqItems.forEach((item) => {
+      const question = item.querySelector('.faq__question');
+      const answer = item.querySelector('.faq__answer');
+
+      answer.style.display = 'none'; // Initially hide all answers
+
+      question.addEventListener('click', () => {
+        const isVisible = answer.style.display === 'block';
+        answer.style.display = isVisible ? 'none' : 'block'; // Toggle visibility
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Frequently Asked Question",
+  "class": "faq",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "FAQ",
+      "type": "faq",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is tallow?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Tallow is a single-ingredient moisturizer that has been used for thousands of years. It is sourced from the fatty tissue of cows, and is rich in vitamins A, D, E, and K. Tallow has a lipid profile similar to that of human skin, so it is easily absorbed and nourishing to the skin barrier."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Frequently Asked Question"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

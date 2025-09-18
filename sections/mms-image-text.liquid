@@ -1,0 +1,241 @@
+<style>
+    .g-image-text{
+        padding: 50px 20px;
+        border-top: 1px solid #3C2D18;
+        border-bottom: 1px solid #3C2D18;
+        background: {{ section.settings.bg }};
+    }
+
+    .g-image-text-wrap{
+        display: flex;
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .g-image-text-wrap > div{
+        width: 50%;
+    }
+
+    .g-it-image img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .g-it-content{
+        display: flex;
+        align-items: center;
+    }
+
+    .g-it-content > div{
+        padding: 38px;
+    }
+
+    .g-it-content h2{
+        font-weight: 700;
+        font-size: 45px;
+        line-height: 45px;
+        margin: 0 0 20px 0;
+        color: #2C1A0B;
+    }
+
+    .g-it-content h2 strong{
+        color: #90B499;
+    }
+
+    .g-it-content p,
+    .g-it-content ul li{
+        font-size: 21x;
+        line-height: 30px;
+        color: #2C1A0B;
+    }
+
+    .g-it-content ul{
+        margin: 0;
+        padding: 0 0 0 20px;
+    }
+
+    .g-it-content .g-cta{
+        margin: 0;
+    }
+
+    .g-it-content-top{
+        font-size: 30px;
+        line-height: 45px;
+        margin-bottom: 15px;
+    }
+
+    .g-it-content img{
+        max-width: 100%;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-image-text-wrap{
+            flex-direction: column;
+        }
+
+        .g-image-text-wrap > div{
+            width: 100%;
+        }
+
+        .g-it-image{
+            display: none;
+        }
+
+        .g-it-content > div{
+            padding: 15px 0 0 0;
+        }
+
+        .g-image-text{
+            padding: 20px;
+        }
+
+        .g-it-content-top{
+            font-size: 20px;
+            line-height: 30px;
+        }
+
+        .g-it-content h2{
+            font-size: 26px;
+            line-height: 31px;
+            margin-bottom: 11px;
+        }
+
+        .g-it-content p, .g-it-content ul li{
+            font-size: 15px;
+            line-height: 20px;
+        }
+
+        .g-it-content ul li{
+            padding-bottom: 11px;
+        }
+
+        .g-image-text-wrap .g-cta{
+            padding: 0;
+            margin: 20px auto 0 auto;
+        }
+
+        .g-image-text-wrap .g-cta a{
+            max-width: unset;
+            text-align: center;
+            width: 100%;
+        }
+    }
+</style>
+<div class="g-image-text">
+    <div class="g-image-text-wrap">
+        <div class="g-it-image">
+            <img src="{{ section.settings.image | image_url: width: "2000px" }}" width="" height="" alt="">
+        </div>
+        <div class="g-it-content">
+            <div>
+                <div class="g-it-content-top">{{ section.settings.top_label }}</div>
+                <h2>{{ section.settings.title }}</h2>
+
+                <img src="{{ section.settings.image | image_url: width: "2000px" }}" width="" height="" alt="" class="g-mobile">
+
+                {{ section.settings.content }}
+                <div class="g-cta">
+                    <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+                    <div class="g-cta-bottom">
+                        {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                        <div>
+                            <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                            <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                        </div>
+                        {% endif %}
+                        {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                        <div>
+                            <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                            <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS Image Text",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background"
+      },
+      {
+        "type": "text",
+        "id": "top_label",
+        "label": "Top Label"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA URL"
+      },
+      {
+        "type": "color",
+        "id": "cta_bg",
+        "label": "CTA Background"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Text Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_1",
+        "label": "CTA Bottom Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_1",
+        "label": "CTA Bottom Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_2",
+        "label": "CTA Bottom Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_2",
+        "label": "CTA Bottom Text 2"
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Image Text"
+      }
+    ]
+  }
+{% endschema %}

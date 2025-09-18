@@ -1,0 +1,118 @@
+<div class="page-width">
+  <div class="ist__wrapper">
+    <div class="grid grid--2-col grid--1-col-tablet-down">
+      <div class="grid__item">
+        {%- assign image = section.settings.image -%}
+        <div class="ist__content-block" style="background-image: url('{{ image | image_url: width: image.width }}');">
+          <div class="ist__content">
+            {%- if section.settings.title -%}
+              <h2 class="ist__title">{{ section.settings.title }}</h2>
+            {%- endif -%}
+            {%- if section.settings.content -%}
+              <div class="ist__rte">
+                {{ section.settings.content }}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.link -%}
+              <a href="{{ section.settings.link }}" class="ist__link">
+                <span class="ist__link-text">{{ section.settings.link_text }}</span>
+                <span class="ist__link-arrow">
+                    <svg width="22" height="8" viewBox="0 0 22 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.3536 4.35355C21.5488 4.15829 21.5488 3.84171 21.3536 3.64645L18.1716 0.464466C17.9763 0.269204 17.6597 0.269204 17.4645 0.464466C17.2692 0.659728 17.2692 0.976311 17.4645 1.17157L20.2929 4L17.4645 6.82843C17.2692 7.02369 17.2692 7.34027 17.4645 7.53553C17.6597 7.7308 17.9763 7.7308 18.1716 7.53553L21.3536 4.35355ZM0 4V4.5H21V4V3.5H0V4Z" fill="#DDD9CF"/>
+                    </svg>
+                </span>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      <div class="grid__item">
+        <div class="ist__carousel">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              {%- for block in section.blocks -%}
+                <div class="swiper-slide">
+                  <div class="ist__item">
+                    {%- assign image = block.settings.image -%}
+                    {{ image | image_url: width: image.width | image_tag: class: 'img-res', loading: 'lazy' }}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var swiper = new Swiper('.ist__carousel .swiper', {
+      slidesPerView: 1,
+      fadeEffect: {
+        crossFade: true
+      },
+      effect: 'fade',
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Introducing Super Tallow",
+    "class": "ist",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "html",
+        "id": "title",
+        "label": "Title",
+        "default": "Introducing Super Tallow<sup>TM</sup>"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text",
+        "default": "Shop now"
+      }, {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Images",
+        "type": "images",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Introducing Super Tallow"
+      }
+    ]
+  }
+{% endschema %}

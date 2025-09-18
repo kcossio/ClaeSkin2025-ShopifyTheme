@@ -1,0 +1,296 @@
+<style>
+    .g-pdp-benefits{
+        padding: 50px 20px;
+        background: {{ section.settings.bg }};
+    }
+
+    .g-pdp-benefits .product-form__buttons button{
+       padding: 30px 0;
+       text-transform: uppercase;
+       font-size: 21px;
+       line-height: 24px;
+       background: {{ section.settings.cta_bg }};
+    }
+  
+    .g-pdp-benefits .product-form__buttons button span{
+       color: {{ section.settings.cta_color }};
+    }
+
+    .g-pdp-benefits h2{
+        font-weight: 500;
+        font-size: 42px;
+        line-height: 45px;
+        letter-spacing: 0%;
+        text-align: center;
+    }
+
+    .g-pdp-benefits-sub{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .g-pdp-benefits-wrap{
+        display: flex;
+        gap: 19px;
+    }
+
+    .g-pdp-benefit{
+        width: 25%;
+        position: relative;
+        border: 2.16px solid #3C2D18;
+    }
+
+    .g-pdp-benefit span{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 64.79px;
+        background: #3C2D18;
+        color: #fff;
+    }
+
+    .g-pdp-benefit-image{
+        padding-top: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .g-pdp-benefit img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        scale: 1.3;
+    }
+
+    .g-pdp-benefits .g-cta{
+        margin-top: 50px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .g-pdp-benefit span{
+            font-size: 18px;
+            line-height: 36px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-pdp-benefit{
+            width: calc(50% - 10px);
+        }
+
+        .g-pdp-benefits-wrap{
+            flex-wrap: wrap;
+        }
+
+        .g-pdp-benefits .g-cta{
+            margin-top: 25px;
+            padding: 0;
+        }
+        
+        .g-pdp-benefits{
+            padding: 20px;
+        }
+
+        .g-pdp-benefits h2{
+            margin: 0;
+            font-size: 28px;
+            line-height: 30px;
+        }
+
+        .g-pdp-benefits-sub{
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .g-pdp-benefit span{
+            font-size: 14px;
+            line-height: 30px;
+        }
+    }
+</style>
+<div class="g-pdp-benefits">
+    <div class="g-wrap">
+        <h2>{{ section.settings.title }}</h2>
+        <p class="g-pdp-benefits-sub">{{ section.settings.subtitle }}</p>
+    
+        <div class="g-pdp-benefits-wrap">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {%- when 'block' -%}
+                  <div class="g-pdp-benefit">
+                      <div class="g-pdp-benefit-image">
+                          <img src="{{ block.settings.image | image_url: width: "2000px" }}" width="" height="" alt="">
+                      </div>
+                      <span>{{ block.settings.text }}</span>
+                  </div>
+              {% endcase %}
+            {% endfor %}
+        </div>
+
+        <div class="g-cta">
+            {%- assign product_form_id = 'product-form-' | append: section.id -%}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'buy_buttons' -%}
+                  {%- render 'buy-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id,
+                    show_pickup_availability: true
+                  -%}
+
+  <!-- LightLabs Widget -->
+  <script src="https://app.lightlabs.com/assets/ll-pip-widget-v5.js"></script>
+  <lightlabs-widget company-id="112"></lightlabs-widget>
+          
+                  <div class="g-cta-bottom">
+                      {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                      </div>
+                      {% endif %}
+                      {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                      <div>
+                          <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                          <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                      </div>
+                      {% endif %}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS PDP Benefits",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA URL"
+      },
+      {
+        "type": "color",
+        "id": "cta_bg",
+        "label": "CTA Background"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Text Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_1",
+        "label": "CTA Bottom Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_1",
+        "label": "CTA Bottom Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_2",
+        "label": "CTA Bottom Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_2",
+        "label": "CTA Bottom Text 2"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "buy_buttons",
+        "name": "t:sections.main-product.blocks.buy_buttons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_dynamic_checkout",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_gift_card_recipient",
+            "default": true,
+            "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+            "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_prices",
+            "default": false,
+            "label": "Show Price and Compare Price"
+          }
+        ]
+      },
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS PDP Benefits"
+      }
+    ]
+  }
+{% endschema %}

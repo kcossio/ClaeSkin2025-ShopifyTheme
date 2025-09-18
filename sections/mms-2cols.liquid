@@ -1,0 +1,187 @@
+<style>
+    .{{ section.id }}.g-2cols{
+        padding: 50px 20px;
+        background: {{ section.settings.bg }};
+    }
+    
+    .{{ section.id }} .g-2cols-wrap.g-2cols-wrap--flip{
+        flex-direction: row-reverse;
+    }
+
+    .{{ section.id }} .g-2cols-wrap{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .{{ section.id }} .g-col{
+        width: 50%;
+    }
+
+    .{{ section.id }} .g-col-image{
+        position: relative;
+        padding-top: 50%;
+    }
+
+    .{{ section.id }} .g-col-image img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .{{ section.id }} .g-col-content{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .{{ section.id }} .g-col-content h2,
+    .{{ section.id }} .g-col-content h3{
+        font-weight: 400;
+        font-size: 52.5px;
+        line-height: 52.5px;
+        color: #2C1A0B;
+        margin: 0;
+    }
+
+    .{{ section.id }} .g-col-content p{
+        font-weight: 300;
+        font-size: 21px;
+        line-height: 30px;
+        color: #2C1A0B;
+        margin: 0;
+    }
+
+    .{{ section.id }} .g-col-content form{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }   
+
+    .{{ section.id }} .g-col-content form button:hover{
+        transform: scale(1.05);
+        box-shadow: 0 0 5px #000;
+    }
+  
+    .{{ section.id }} .g-col-content form button{
+        background: #3C2D18;
+        border: 0;
+        cursor: pointer;
+        color: #F5F4EE;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 27px;
+        padding: 20px;
+        transition: 0.1s ease-out;
+    }
+
+    .{{ section.id }} .g-col-content form input{
+        width: 100%;
+        border: 1.5px solid #2B4D47;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 27px;
+        padding: 20px;
+        border-radius: 3px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .{{ section.id }} .g-2cols-wrap{
+            flex-direction: column;
+        }
+
+        .{{ section.id }} .g-2cols-wrap.g-2cols-wrap--flip{
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .{{ section.id }} .g-col{
+            width: 100%;
+        }
+
+        .{{ section.id }} .g-col-image{
+            padding-top: 100%;
+        }
+
+        .{{ section.id }} .g-col-content h2, .{{ section.id }} .g-col-content h3{
+            font-size: 35px;
+            line-height: 35px;
+        }
+
+        .{{ section.id }} .g-col-content p{
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .{{ section.id }} .g-col-content form input, .{{ section.id }} .g-col-content form button{
+            font-size: 16px;
+            line-height: 16px;
+            padding: 16.5px;
+        }
+
+        .{{ section.id }}.g-2cols{
+            padding: 20px;
+        }
+    }
+</style>
+<div class="{{ section.id }} g-2cols"> 
+    <div class="g-wrap">
+        <div class="g-2cols-wrap g-2cols-wrap--flip">
+            <div class="g-col">
+                <div class="g-col-image">
+                    <img src="{{ section.settings.image | image_url: width: "2000px" }}" width="" height="" alt="">
+                </div>
+            </div>
+            <div class="g-col">
+                <div class="g-col-content">
+                    <h2>{{ section.settings.title }}</h2>
+                    <p>{{ section.settings.content }}</p>
+                    <form method="post" action="/contact#contact_form">
+                        <input type="hidden" name="form_type" value="contact">
+                        <input type="hidden" name="utf8" value="✓">
+                        
+                        <input type="email" name="contact[email]" placeholder="Enter your email" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS 2 Cols",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS 2 Cols"
+      }
+    ]
+  }
+{% endschema %}

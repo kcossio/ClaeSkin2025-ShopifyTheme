@@ -1,0 +1,291 @@
+<style>
+    .g-banner{
+        background: {{ section.settings.bg }};
+    }
+
+    .g-banner-wrap{
+        display: flex;
+        justify-content: center;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .g-banner-content,
+    .g-banner-image{
+        width: 50%;
+    }
+
+    .g-banner-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 15px;
+        max-width: 510px;
+        align-items: center;
+    }
+
+    .g-banner-content h1{
+        font-weight: 500;
+        text-align: center;
+        font-size: 55px;
+        line-height: 52px;
+        margin: 22.5px 0;
+        color: #2C1A0B;
+    }
+
+    .g-banner-content p{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        margin: 0;
+        text-align: center;
+        color: #2C1A0B;
+    }
+
+    .g-banner-image{
+        background-image: url("https://cdn.shopify.com/s/files/1/0906/9782/6608/files/banner_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+
+    .g-banner-image img, .g-banner-mobile img{
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        object-fit: cover;
+        height: 100%;
+    }
+    
+    .g-banner-stars{
+        display: flex;
+        align-items: center;
+        gap: 0;
+    }
+
+    .g-banner-stars svg{
+        width: 18px;
+    }
+
+    .g-banner-stars-wrap{
+        display: inline-flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+        padding: 4px 12px;
+        border: 1px solid #3C2D18;
+        border-radius: 3px;
+    }
+
+    .g-banner-stars-wrap p{
+        margin: 0;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-banner-wrap{
+            flex-direction: column;
+        }
+
+        .g-banner-content,
+        .g-banner-image{
+            width: 100%;
+        }
+        
+        .g-banner-content{
+            padding: 16px 7px;
+            text-align: center;
+        }
+
+        .review-stats--left{
+            justify-content: center;
+        }
+
+        .g-banner-content h1{
+            font-size: 37px;
+            line-height: 35px;
+            margin: 10px 0 0 0;
+        }
+
+        .g-banner-content > p{
+            font-size: 12px;
+            line-height: 16px;
+            margin-top: 9px;
+        }
+
+        .g-banner-stars-wrap p{
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .g-banner .g-cta{
+            margin: 15px auto;
+            padding: 0;
+        }
+
+        .g-banner .g-cta a{
+            font-size: 14px;
+            line-height: 16px;
+            padding: 20px;
+        }
+
+        .g-mobile{
+            display: block !important;
+        }
+
+        .g-desktop{
+            display: none !important;
+        }
+
+        .g-banner-wrap{
+            background-image: url("https://cdn.shopify.com/s/files/1/0906/9782/6608/files/banner_bg.jpg");
+            background-repeat: no-repeat;
+            background-size: auto 60%;
+            background-position: bottom;
+            position: relative;
+        }
+
+        .g-banner-wrap::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, #E8E0DC 0%, rgba(232, 224, 220, 0) 100%);
+        }
+
+        .g-banner-content{
+            position: relative;
+        }
+    }
+</style>
+<div class="g-banner">
+    <div class="g-banner-wrap">
+        <div class="g-banner-content">
+            <div class="g-banner-stars-wrap">
+                <div class="g-banner-stars">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""/>
+                    </svg>
+                </div>
+                {{ section.settings.ratings }}
+            </div>
+            <h1>{{ section.settings.title }}</h1>
+            <p>{{ section.settings.subtitle }}</p>
+            
+            <div class="g-cta">
+                <a href="{{ section.settings.cta_url }}">{{ section.settings.cta_text }}</a>
+                <div class="g-cta-bottom">
+                    {% if section.settings.cta_bottom_icon_1 != blank and section.settings.cta_bottom_text_1 != blank %}
+                    <div>
+                        <img src="{{ section.settings.cta_bottom_icon_1 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                        <span>{{ section.settings.cta_bottom_text_1 }}</span>
+                    </div>
+                    {% endif %}
+                    {% if section.settings.cta_bottom_icon_2 != blank and section.settings.cta_bottom_text_2 != blank %}
+                    <div>
+                        <img src="{{ section.settings.cta_bottom_icon_2 | image_url: width: "200px" }}" width="30" height="30" alt="">
+                        <span>{{ section.settings.cta_bottom_text_2 }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="g-banner-image">
+            <img src="{{ section.settings.image | image_url: width: "2000px" }}" width="" height="" alt="">
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS Banner",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#D1D7DE"
+      },
+      {
+        "type": "richtext",
+        "id": "ratings",
+        "label": "Ratings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA URL"
+      },
+      {
+        "type": "color",
+        "id": "cta_bg",
+        "label": "CTA Background"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Text Color"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_1",
+        "label": "CTA Bottom Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_1",
+        "label": "CTA Bottom Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cta_bottom_icon_2",
+        "label": "CTA Bottom Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text_2",
+        "label": "CTA Bottom Text 2"
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Banner"
+      }
+    ]
+  }
+{% endschema %}

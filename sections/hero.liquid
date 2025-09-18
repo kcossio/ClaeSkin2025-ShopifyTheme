@@ -1,0 +1,58 @@
+{%- # Label: Image -%}
+{%- assign image = section.settings.image -%}
+
+<div class="hero__wrapper" style="background-image: url('{{ image | image_url: width: image.width }}')">
+    <div class="page-width">
+        <div class="hero__content">
+            {%- if section.settings.title -%}
+                <h1>{{ section.settings.title }}</h1>
+            {%- endif -%}
+            {%- if section.settings.subtitle -%}
+                <h4>{{ section.settings.subtitle }}</h4>
+            {%- endif -%}
+        </div>
+        <div class="hero__shape">
+            <img src="{{ 'arrow-down.svg' | asset_url }}" alt="{{ shop.name }}" loading="lazy" />
+        </div>
+    </div>
+</div>
+
+
+
+{% schema %}
+  {
+  "name": "hero",
+  "class": "hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "History Redefined."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "ONE INGREDIENT, PERFECTED."
+    }
+  ],
+  "presets": [
+    {
+      "name": "hero"
+    }
+  ]
+}  
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

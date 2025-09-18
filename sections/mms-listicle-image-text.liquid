@@ -1,0 +1,220 @@
+<style>
+    .{{ section.id }} .g-image-text-wrap{
+        display: flex;
+    }
+
+    .{{ section.id }} .g-image-text-wrap > div{
+        width: 50%;
+    }
+
+    .{{ section.id }} .g-it-image img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .{{ section.id }} .g-it-content{
+        display: flex;
+        align-items: center;
+        background: #F8F8F8;
+        text-align: center;
+    }
+
+    .{{ section.id }} .g-it-content > div{
+        padding: 38px;
+    }
+
+    .{{ section.id }} .g-it-content h2{
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 58px;
+        margin: 0 0 20px 0;
+        text-align: center;
+    }
+
+    .{{ section.id }} .g-it-content h2 strong{
+        color: #90B499;
+    }
+
+    .{{ section.id }} .g-it-content > div > p,
+    .{{ section.id }} .g-it-content ul li{
+        font-size: 24px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .{{ section.id }} .g-it-content ul{
+        margin: 0;
+        padding: 0 0 0 20px;
+    }
+
+    .{{ section.id }} .g-it-content .g-cta a{
+        border-radius: 30px;
+        padding: 17px 0;
+    }
+
+    .{{ section.id }} .g-it-ratings{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+
+    .{{ section.id }} .g-it-ratings > span{
+        display: flex;
+    }
+
+    .{{ section.id }} .g-it-ratings > p{
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    .{{ section.id }} .g-it-ratings p{
+        margin: 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .{{ section.id }} .g-image-text-wrap{
+            flex-direction: column-reverse;
+        }
+
+        .{{ section.id }} .g-image-text-wrap > div{
+            width: 100%;
+        }
+
+        .{{ section.id }} .g-it-content p, .{{ section.id }} .g-it-content ul li{
+            font-size: 12px;
+            line-height: 14px;
+        }
+
+        .{{ section.id }} .g-it-content > div{
+            padding: 15px;
+        }
+
+        .{{ section.id }} .g-it-content h2{
+            font-size: 26px;
+            line-height: 31px;
+            margin-bottom: 11px;
+        }
+
+        .{{ section.id }} .g-it-content ul li{
+            padding-bottom: 11px;
+        }
+
+        .{{ section.id }} .g-image-text-wrap .g-cta{
+            padding: 0;
+            margin: 20px auto 0 auto;
+        }
+
+        .{{ section.id }} .g-image-text-wrap .g-cta a{
+            max-width: unset;
+            text-align: center;
+            width: 100%;
+        }
+    }
+</style>
+<div class="{{ section.id }} g-image-text">
+    <div class="g-image-text-wrap">
+        <div class="g-it-content">
+            <div>
+                {% if section.settings.ratings != blank %}
+                <div class="g-it-ratings">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                            <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#EFC277"></path>
+                        </svg>
+                    </span>
+                    {{ section.settings.ratings }}
+                </div>
+                {% endif %}
+                <h2>{{ section.settings.title }}</h2>
+                <p>{{ section.settings.subtitle }}</p>
+
+                
+                {% if section.settings.cta_text != blank and section.settings.cta_link != blank %}
+                <div class="g-cta">
+                    <a href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }}</a>
+                    <div class="g-cta-bottom">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <span>{{ section.settings.cta_bottom_text }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="g-it-image">
+            <img src="{{ section.settings.image | image_url: width: "1980px" }}" width="" height="" alt="">
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS Listicle Image Text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "richtext",
+        "id": "ratings",
+        "label": "Ratings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text",
+        "default": "Get Your Super Tallow Now"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_bottom_text",
+        "label": "Bottom Link Text",
+        "default": "30 day money back guarantee"
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "MMS Listicle Image Text"
+      }
+    ]
+  }
+{% endschema %}

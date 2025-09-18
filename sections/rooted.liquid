@@ -1,0 +1,43 @@
+
+<div class="page-width">
+    <div class="rooted__content">
+        {%- if section.settings.title -%}
+            <h2>{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.button_text and section.settings.button_link -%}
+            <a href="{{ section.settings.button_link }}" class="button">{{ section.settings.button_text }}</a>
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+  {
+  "name": "rooted",
+  "class": "rooted",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Rooted in ancestral wisdom, crafted in its purest form. Your skin deserves nothing less."
+    },
+    {
+      "type": "html",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SHOP SUPER TALLOW<sup>TM</sup>"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "rooted"
+    }
+  ]
+}  
+{% endschema %}

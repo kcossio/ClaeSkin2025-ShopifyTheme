@@ -1,0 +1,366 @@
+<style>
+    .{{ section.id }}.g-image-text-blocks{
+        padding: 50px 20px;
+        background-color: {{ section.settings.bg }};
+    }
+
+    .{{ section.id }} .g-image-text-block--title{
+        font-size: 40px;
+        font-weight: 550;
+        line-height: 42px;
+        text-align: center;
+        margin: 0 0 20px 0;
+    }
+
+    .{{ section.id }} .g-image-text-block--sub{
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 27px;
+        text-align: center;
+        margin: 0 0 50px 0;
+    }
+
+    .{{ section.id }} .g-image-text-blocks-wrap{
+        display: flex;
+        gap: 20px;
+    }
+
+    .{{ section.id }} .g-image-text-block{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid #000;
+        flex: 1;
+        background: #fff;
+    }
+
+    .{{ section.id }} .g-itb--image{
+        height: 257px;
+    }
+
+    .{{ section.id }} .swiper.g-itb-slider{
+        padding-bottom: 50px;
+    }
+
+    .{{ section.id }} .swiper-pagination-bullet{
+        height: 3px;
+        border-radius: 3px;
+        width: 22.5px;
+        transition: 0.2s ease-out;
+    }
+
+    .{{ section.id }} .swiper-pagination-bullet-active{
+        width: 60px;
+        background-color: #3C2D18;
+    }
+
+    .{{ section.id }} .g-itb--image img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
+
+    .{{ section.id }} .g-itb--content{
+        font-size: 21px;
+        font-weight: 300;
+        line-height: 27px;
+    }
+
+    .{{ section.id }} .g-itb--name{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 21px;
+        font-weight: 300;
+        line-height: 27px;
+    }
+
+    .{{ section.id }} .g-itb--name span{
+        font-weight: 400;
+    }
+
+    .{{ section.id }} .g-itb--name svg{
+        width: 20px;
+    }
+
+    .{{ section.id }} .g-pdp-cta-moneyback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-size: 21px;
+        font-weight: 400;
+        line-height: 25.05px;
+    }
+
+    .{{ section.id }} .g-pdp-cta-moneyback img{
+        width: 24px;
+    }
+
+    .{{ section.id }} .g-itb-cta{
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .{{ section.id }} .g-itb-cta a{
+        width: 100%;
+        max-width: 584px;
+        height: 84px;
+        border: 1px solid #000;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        background-color: #E4F5A1;
+        color: #000;
+        text-decoration: none;
+
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+
+    .{{ section.id }} .g-itb-slider-wrapper{
+        margin-top: 67px;
+        padding: 0 76px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .{{ section.id }} .g-prev,
+    .{{ section.id }} .g-next{
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #3C2D18;
+        border-radius: 36px;
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .{{ section.id }} .g-prev{
+        left: 20px;
+    }
+
+    .{{ section.id }} .g-next{
+        right: 20px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .{{ section.id }} .swiper-pagination-bullet-active{
+            background: #000;
+        }
+
+        .{{ section.id }}.g-image-text-blocks{
+            padding: 30px 0;
+        }
+
+        .{{ section.id }} .g-itb-slider{
+            padding-bottom: 40px;
+        }
+
+        .{{ section.id }} .g-itb--content, .{{ section.id }} .g-itb--name span{
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .{{ section.id }} .g-itb--name{
+            font-size: 12px;
+            line-height: 12px;
+        }
+
+        .{{ section.id }} .g-itb--review svg{
+            width: 15.6px;
+            height: 15.6px;
+        }
+
+        .{{ section.id }} .g-itb--image{
+            height: 190px;
+        }
+
+        .{{ section.id }} .g-image-text-block--title{
+            font-size: 28px;
+            line-height: 30px;
+            padding: 0 20px;
+        }
+
+        .{{ section.id }} .g-image-text-block--sub{
+            font-size: 12px;
+            line-height: 18px;
+            margin: 0 0 20px 0;
+            padding: 0 20px;
+        }
+        
+        .{{ section.id }} .g-itb-cta{
+            margin-top: 20px;
+        }
+
+        .{{ section.id }} .g-itb-cta a{
+            height: 56px;
+            font-size: 16px;
+        }
+
+        .{{ section.id }} .g-pdp-cta-moneyback{
+            font-size: 14px;
+        }
+
+        .{{ section.id }} .g-itb-slider-wrapper {
+            margin-top: 25px;
+            padding: 0 0 0 20px;
+        }
+
+        .{{ section.id }} .swiper.g-itb-slider{
+            padding-right: 10%;
+        }
+
+        .{{ section.id }} .g-prev,
+        .{{ section.id }} .g-next{
+            display: none;
+        }
+    }
+</style>
+<div class="{{ section.id }} g-image-text-blocks">
+    <div class="g-wrap">
+
+        <h2 class="g-image-text-block--title">{{ section.settings.title }}</h2>
+        <h3 class="g-image-text-block--sub">{{ section.settings.subtitle }}</h3>
+
+        <div class="g-itb-slider-wrapper">
+            <div class="g-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
+                    <path d="M0.292793 7.29289C-0.0977311 7.68342 -0.0977311 8.31658 0.292793 8.70711L6.65675 15.0711C7.04728 15.4616 7.68044 15.4616 8.07097 15.0711C8.46149 14.6805 8.46149 14.0474 8.07097 13.6569L2.41411 8L8.07097 2.34315C8.46149 1.95262 8.46149 1.31946 8.07097 0.928933C7.68044 0.538408 7.04728 0.538408 6.65675 0.928933L0.292793 7.29289ZM1 7L0.9999 7L0.9999 9L1 9L1 7Z" fill="#3C2D18"/>
+                </svg>
+            </div>
+
+            <div class="swiper g-itb-slider">
+                <div class="swiper-wrapper">
+                    {% for block in section.blocks %}
+                      <div class="swiper-slide">
+                          <div class="g-image-text-block">
+                              <div class="g-itb--image">
+                                  <img src="{{ block.settings.image | image_url: width: "2000px" }}" width="" height="" alt="">
+                              </div>
+                              <div class="g-itb--review">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                      <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""></path>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                      <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""></path>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                      <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""></path>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                      <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""></path>
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                      <path d="M11.6471 19.1118L5.60438 22.5672L6.92474 15.4033L6.99624 15.0153L6.71711 14.7366L3.77949 11.8032L3.77832 11.8021L1.68278 9.71874L5.20418 9.2667L5.20552 9.26653L8.56613 8.84128L8.98249 8.7886L9.15538 8.40618L12.1 1.89302L14.9857 8.43247L15.1552 8.81643L15.571 8.87287L18.9277 9.3284L18.929 9.32858L22.4437 9.81201L21.7988 10.44L21.7976 10.4412L17.3418 14.8003L17.0585 15.0774L17.1279 15.4676L17.8202 19.3626L17.8205 19.3642L18.3921 22.6225L12.3982 19.1156L12.0237 18.8965L11.6471 19.1118Z" fill="#2C1A0B" stroke="" stroke-width=""></path>
+                                  </svg>
+                              </div>
+                              <div class="g-itb--content">
+                                  {{ block.settings.content }}
+                              </div>
+                              <div class="g-itb--name">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                                  </svg>
+                                  <span>{{ block.settings.name }}  |  Verified Customer</span>
+                              </div>
+                          </div>
+                      </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="g-next">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.70721 7.29289C9.09773 7.68342 9.09773 8.31658 8.70721 8.70711L2.34325 15.0711C1.95272 15.4616 1.31956 15.4616 0.929033 15.0711C0.538509 14.6805 0.538508 14.0474 0.929033 13.6569L6.58589 8L0.929032 2.34315C0.538507 1.95262 0.538507 1.31946 0.929032 0.928933C1.31956 0.538408 1.95272 0.538408 2.34325 0.928933L8.70721 7.29289ZM8 7L8.0001 7L8.0001 9L8 9L8 7Z" fill="#3C2D18"/>
+                </svg>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        new Swiper('.g-itb-slider', {
+            spaceBetween: 20,
+            slidesPerView: 1,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.g-prev',
+                prevEl: '.g-next'
+            },
+            pagination:  {
+                el: ".swiper-pagination",
+                clickable: true, 
+            },
+            breakpoints: {
+                769: {
+                    slidesPerView: 3
+                }
+            }
+        });
+
+    });
+</script>
+                          
+{% schema %}
+  {
+    "name": "MMS Image Text Blocks",
+   "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#F5E8DE"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Image Text Blocks"
+      }
+    ]
+  }
+{% endschema %}

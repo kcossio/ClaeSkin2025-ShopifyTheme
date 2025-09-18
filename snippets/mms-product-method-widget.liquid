@@ -1,0 +1,212 @@
+{% assign default_sale_price = product.price %}
+{% assign default_compare_price = product.compare_at_price %}
+
+{% if product.selling_plan_groups.size > 0 %}
+  {% if product.variants.size > 1 %}
+      {% if product.variants[1].selling_plan_allocations.size > 0 %}
+        {% assign default_sale_price = product.variants[1].selling_plan_allocations.first.price_adjustments.first.price %}
+        {% assign default_compare_price = product.variants[1].compare_at_price %}
+      {% else %}
+        {% assign default_sale_price = product.variants[1].price %}
+        {% assign default_compare_price = product.variants[1].compare_at_price %}
+      {% endif %}
+  {% else %}
+      {% if product.selected_or_first_available_variant.selling_plan_allocations.size > 0 %}
+        {% assign default_sale_price = product.selected_or_first_available_variant.selling_plan_allocations.first.price_adjustments.first.price %}
+        {% assign default_compare_price = product.selected_or_first_available_variant.price %}
+      {% else %}
+        {% assign default_sale_price = product.selected_or_first_available_variant.price %}
+        {% assign default_compare_price = product.selected_or_first_available_variant.compare_at_price %}
+      {% endif %}
+  {% endif %}
+{% endif %}
+
+<div class="g-pdp-bundle-wrapper"{% if product.selling_plan_groups.size == 0 %} style="display: none"{% endif %}>
+    <div class="g-pdp-methods">
+        <div class="grid">
+          <div class="grid__item">
+        <div class="g-pdp-methods-items" style="--theme-color: #3F3124;">
+        <div class="g-pdp-method g-pdp-method--selected g-pdp-method-sub" 
+          data-sp="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" 
+          data-method="subscription"
+          data-sale-ot="{{ product.price | money }}" 
+          data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" 
+          data-compare="{{ product.price | money }}"
+          data-vid  ="{{ product.selected_or_first_available_variant.id }}"
+          data-btn-text = "1-month supply"
+        >
+            <div class="g-pdp-method-header">
+                <span class="g-pdp-circle"></span>
+            <div class="g-pdp-method-callout" style="background: {{ section.settings.callout_bg_1 }}">{{ section.settings.callout_text }}</div>
+                <div class="g-pdp-header--title">
+                    <span class="g-pdp-tag-title">1-month supply</span>
+                    <!-- <span id="price_per_bottle">
+                    {% if product.variants.size > 1 %}
+                        {{ product.variants[1].selling_plan_allocations.first.price_adjustments.first.price | divided_by: 2 | money }}
+                    {% else %}
+                        {{ product.selected_or_first_available_variant.selling_plan_allocations.first.price_adjustments.first.price | money }}
+                    {% endif %} per bottle</span> -->
+                </div>
+                <div class="g-pdp-header--sub">
+                    <span id="supply_days">Daily application for 1 person</span>
+                    <span id="per_serving">{{ section.settings.app_per_day }}</span>
+                </div>
+            </div>
+            <div class="g-pdp-method-content">
+                {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when 'usps' %}
+                    <div class="g-pdp-method-content-icon">
+                        {% comment %}
+                            <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
+                        {% endcomment %}
+                        <span>{{ block.settings.usp_text }}</span>
+                    </div>
+                {% endcase %}
+                {% endfor %}
+            </div>
+            <span id="price_per_bottle">
+                <span class="g-pdp-sale">{{ product.selected_or_first_available_selling_plan_allocation.price | money }}</span>
+                <span class="g-pdp-compare">{{ product.selected_or_first_available_selling_plan_allocation.compare_at_price | money }}</span>
+            </span>
+            {% if section.settings.show_limited_edition == true %}
+              <div class="g-pdp-bottom-note">
+                {{ section.settings.limited_edition }}
+                <img src="{{ section.settings.limited_edition_image | image_url: width: "1000px" }}" alt="" width="" height="">
+              </div>
+            {% endif %}
+        </div>
+        </div>
+        </div>
+
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'xl_product' %}
+              <div class="grid__item">
+            <div class="g-pdp-methods-items" style="--theme-color: #7F6552;">
+
+              <div class="g-pdp-method-callout" style="background: {{ section.settings.callout_bg_2 }}">{{ section.settings.callout_text_2 }}</div>
+              <div class="g-pdp-method g-pdp-method-sub" 
+                data-sp="{{ block.settings.product_xl.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" 
+                data-method="subscription"
+                data-sale-ot="{{ block.settings.product_xl.price | money }}" 
+                data-sale="{{ block.settings.product_xl.selected_or_first_available_selling_plan_allocation.price | money }}" 
+                data-compare=""
+                data-vid="{{ block.settings.product_xl.selected_or_first_available_variant.id }}"
+                data-btn-text = "3-month supply"
+                >
+                  <div class="g-pdp-method-header">
+                      <div class="g-pdp-header--title">
+                          <span class="g-pdp-tag-title">3-month supply</span>
+                      </div>
+                  </div>
+                  <div class="g-pdp-method-content">
+                      {% for block in section.blocks %}
+                      {% case block.type %}
+                          {% when 'usps-dynamic' %}
+                          <div class="g-pdp-method-content-icon">
+                            {% comment %}
+                                 <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
+                            {% endcomment %} 
+                            <span>{{ block.settings.usp_text }}</span>
+                          </div>
+                      {% endcase %}
+                      {% endfor %}
+                  </div>
+                <span id="price_per_bottle_xl">
+                    <span class="g-pdp-sale">{{ block.settings.product_xl.price | money }}</span>
+                    <span class="g-pdp-compare">{{ block.settings.product_xl.compare_at_price | money }}</span>
+                </span>
+              </div>
+              </div>
+                </div>
+          {% endcase %}
+        {% endfor %}  
+        </div>
+        <div class="g-pdp-method-item g-pdp-method-item--onetime">
+            <div class="g-pdp-method" data-vid="{{ product.selected_or_first_available_variant.id }}" data-sp="" data-method="onetime" data-sale-ot="{{ product.price | money }}" data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" data-compare="{{ product.compare_at_price | money }}" data-btn-text = "One Bottle ">
+                <div class="g-pdp-method-header">
+                    <span class="g-pdp-circle"></span>
+                    <div class="g-pdp-header--title">
+                        <span>One time purchase</span>
+                        <span id="price_per_bottle">
+                            <span class="g-pdp-sale">One Bottle<span class="price">{{ product.price | money }}</span></span>
+                        </span>
+                    </div>
+                    <div class="g-pdp-header--sub">
+                        <span class="per_serving">{{ section.settings.ot_callout_text }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g-pdp-method-item g-pdp-method-item--onetime">
+            <div class="g-pdp-method" data-vid="{{ product.variants.last.id }}" data-sp="" data-method="onetime" data-sale-ot="{{ product.variants.last.price | money }}" data-sale="{{ product.variants.last.price | money }}" data-compare="{{ product.variants.last.compare_at_price | money }}" data-btn-text = "Three Bottles">
+                <div class="g-pdp-method-header">
+                    <span class="g-pdp-circle"></span>
+                    <div class="g-pdp-header--title">
+                        <span>One time purchase </span>
+                        <span id="price_per_bottle">
+                            <span class="g-pdp-sale">Three Bottles<span class="price">{{ product.variants.last.price | money }}</span></span>
+                        </span>
+                    </div>
+                    <div class="g-pdp-header--sub">
+                        <span class="per_serving">{{ section.settings.ot_callout_text }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const methods = document.querySelectorAll(".g-pdp-method");
+        methods.forEach(method => {
+            method.addEventListener("click", function(){
+                methods.forEach(m => m.classList.remove("g-pdp-method--selected"));
+
+                this.classList.add("g-pdp-method--selected");
+                const sp = this.getAttribute("data-sp");
+                document.querySelectorAll(".selling_plan").forEach(sellingplan => {
+                  sellingplan.value = sp;
+                });
+
+                const productInput = document.querySelector('input[name="product-id"]');
+                const idInput = document.querySelector('input[name="id"]');
+
+                const vid = this.getAttribute("data-vid");
+      
+                //if (productInput) productInput.value = item.product_id;
+                if (idInput) idInput.value = vid;
+
+                const method = this.getAttribute("data-method");
+
+                let sale = "";
+                let compare = "";
+            
+                if(method === "onetime"){
+                  sale = this.getAttribute("data-sale-ot");
+                  compare = this.getAttribute("data-compare");
+                }else{
+                  sale = this.getAttribute("data-sale");
+                  compare = this.getAttribute("data-compare");
+                }
+
+                let btnText = this.getAttribute("data-btn-text");
+
+                document.querySelectorAll(".g-pdp-plan-text").forEach(btn => {
+                  btn.innerHTML = btnText;
+                });
+
+                document.querySelectorAll(".product-form .g-pdp-sale").forEach(saleElement => {
+                  saleElement.innerHTML =   sale;
+                });
+
+                document.querySelectorAll(".product-form .g-pdp-compare").forEach(compareElement => {
+                  compareElement.innerHTML = compare;
+                });
+            });
+        });
+    });
+</script>

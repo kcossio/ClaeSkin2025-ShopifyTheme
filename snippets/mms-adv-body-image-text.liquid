@@ -1,0 +1,35 @@
+<div class="g-adv-body-text-image">
+    <div class="g-adv-bti--content">
+        {{ block.settings.content }}
+
+        {% if block.settings.quoted != blank %}
+          <div class="quote-box">
+              {{ block.settings.quoted }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.quoted_2 != blank %}
+          <h4 class="g-adv-bti--quoted">{{ block.settings.quoted_2_title }} <img src="https://cdn.shopify.com/s/files/1/0636/1933/4342/files/momonna_small_logo.png?v=1744082869" alt="" width="40" height=""></h4>
+          <div class="quote-box">
+              {{ block.settings.quoted_2 }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
+        <div class="g-cta">
+            <a href="{{ block.settings.cta_link }}">{{ block.settings.cta_text }}</a>
+            <div class="g-cta-bottom">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>{{ block.settings.cta_bottom_text }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="g-adv-bti--image">
+        <img src="{{ block.settings.image | image_url: width: "1980px" }}" width="" height="" alt="">
+    </div>
+</div>

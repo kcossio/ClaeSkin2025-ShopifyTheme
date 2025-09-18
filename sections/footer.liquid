@@ -1,0 +1,51 @@
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+
+
+<div class="page-width">
+    <div class="footer__wrapper page-width">
+        <div class="footer__content">
+            {%- if section.settings.logo -%}
+                <div class="footer__logo">
+                    <img src="{{ section.settings.logo | image_url: width: logo.width  }}" alt="{{ shop.name }}">
+                </div>
+            {%- endif -%}
+            {%- if section.settings.about -%}
+                <div class="footer__about">
+                    <p>{{ section.settings.about }}</p>
+                </div>
+            {%- endif -%}
+            <div class="footer__social">
+              {%- render 'social-icons', class: 'footer__list-social' -%}
+            </div>
+        </div>
+    </div>
+    <div class="footer__bottom">
+        <p>&copy; CLAE {{ 'now' | date: '%Y' }}</p>
+    </div>
+</div>
+
+{% schema %}
+  {
+  "name": "Footer",
+  "class": "footer",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "about",
+      "label": "About",
+      "default": "Redefining skincare by embracing simplicity, sustainability, and the power of natural ingredients."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}  
+{% endschema %}

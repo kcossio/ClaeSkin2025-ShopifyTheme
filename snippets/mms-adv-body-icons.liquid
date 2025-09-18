@@ -1,0 +1,32 @@
+<div class="g-adv-body-icons">
+    {% if block.settings.icon_1 != blank and block.settings.text_1 != blank %}
+    <div>
+        <img src="{{ block.settings.icon_1 | image_url: width: "300px" }}" width="" height="" alt="">
+        <span>{{ block.settings.text_1 }}</span>
+    </div>
+    {% endif %}
+    {% if block.settings.icon_2 != blank and block.settings.text_2 != blank %}
+    <div>
+        <img src="{{ block.settings.icon_2 | image_url: width: "300px" }}" width="" height="" alt="">
+        <span>{{ block.settings.text_2 }}</span>
+    </div>
+    {% endif %}
+    {% if block.settings.icon_3 != blank and block.settings.text_3 != blank %}
+    <div>
+        <img src="{{ block.settings.icon_3 | image_url: width: "300px" }}" width="" height="" alt="">
+        <span>{{ block.settings.text_3 }}</span>
+    </div>
+    {% endif %}
+    {% if block.settings.icon_4 != blank and block.settings.text_4 != blank %}
+    <div>
+        <img src="{{ block.settings.icon_4 | image_url: width: "300px" }}" width="" height="" alt="">
+        <span>{{ block.settings.text_4 }}</span>
+    </div>
+    {% endif %}
+    {% if block.settings.icon_5 != blank and block.settings.text_5 != blank %}
+    <div>
+        <img src="{{ block.settings.icon_5 | image_url: width: "300px" }}" width="" height="" alt="">
+        <span>{{ block.settings.text_5 }}</span>
+    </div>
+    {% endif %}
+</div>

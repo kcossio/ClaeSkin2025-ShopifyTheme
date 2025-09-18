@@ -1,0 +1,302 @@
+<style>
+    .g-videos{
+        background: {{ section.settings.bg }};
+        padding: 50px 20px;
+    }
+
+    .g-videos .g-wrap{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .g-stars-wrap{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .g-stars{
+        display: flex;
+    }
+
+    .g-videos h2{
+        text-align: center;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        margin: 0;
+    }
+
+    .g-videos-wrap{
+        display: flex;
+        gap: 20px;
+    }
+
+    .g-video{
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .g-video-player{
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .g-video video,
+    .g-video img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 10px;
+    }
+
+    .g-video-play{
+        background: #FFFFFF3B;
+        width: 46px;
+        height: 46px;
+        border-radius: 50px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.1s ease-out;
+    }
+
+    .g-video-play:hover{
+        transform: scale(1.2);
+    }
+
+    .g-video-review p,
+    .g-video-review span{
+        font-size: 18px;
+        line-height: 27px;
+        color: #3C3224;
+    }
+
+    .g-videos-sub{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 30px;
+        text-align: center;
+        margin: 0;
+    }
+
+    .g-videos .swiper-pagination-bullet{
+        height: 3px;
+        border-radius: 3px;
+        width: 22.5px;
+        transition: 0.2s ease-out;
+    }
+
+    .g-videos .swiper-pagination-bullet-active{
+        width: 60px;
+        background-color: #3C2D18;
+    }
+  
+    @media only screen and (max-width: 1024px) {
+        .g-videos-wrap{
+            flex-wrap: wrap;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-videos h2{
+            font-size: 30px;
+            line-height: 36px;
+        }
+
+        .g-videos{
+            padding: 20px;
+        }
+
+        .g-video-review p,
+        .g-video-review span{
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        .swiper.g-videos-slider{
+            padding-right: 40%;
+            padding-bottom: 50px;
+        }
+    }
+</style>
+
+<div class="g-videos">
+    <div class="g-wrap">
+        <h2>{{ section.settings.title }}</h2>
+        <p class="g-videos-sub">{{ section.settings.subtitle }}</p>
+
+        <div class="g-videos-wrapper">
+            <div class="swiper g-videos-slider">
+                <div class="swiper-wrapper">
+                    {% for block in section.blocks %}
+                    <div class="swiper-slide">
+                        <div class="g-video">
+                            <div class="g-video-player">
+                                <span class="g-video-play">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+                                        <path d="M13.6979 9.03127L2.73109 15.3945C1.80039 15.934 0.605957 15.2807 0.605957 14.1932V1.46667C0.605957 0.380895 1.79864 -0.274047 2.73109 0.267096L13.6979 6.63037C13.9096 6.75124 14.0856 6.92599 14.208 7.13676C14.3304 7.34763 14.3948 7.58709 14.3948 7.83086C14.3948 8.07464 14.3304 8.31409 14.208 8.52487C14.0856 8.73574 13.9096 8.91039 13.6979 9.03127Z" fill="white"/>
+                                    </svg>
+                                </span>
+                               {% if block.settings.video != blank %}
+                                  <video src="{{ block.settings.video.sources[1].url }}"></video>
+                                {% else %}
+                                  {% if request.design_mode == true %}
+                                    <img src="https://placehold.co/800x1200?text=Select a video" alt="" width="" height="">
+                                  {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="g-video-review">
+                                <span class="g-stars">
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.50006 0.796875L11.5207 7.01572H18.0596L12.7695 10.8592L14.7902 17.078L9.50006 13.2346L4.20999 17.078L6.23062 10.8592L0.940552 7.01572H7.47943L9.50006 0.796875Z" fill="#FFC700"/>
+                                    </svg>
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.50006 0.796875L11.5207 7.01572H18.0596L12.7695 10.8592L14.7902 17.078L9.50006 13.2346L4.20999 17.078L6.23062 10.8592L0.940552 7.01572H7.47943L9.50006 0.796875Z" fill="#FFC700"/>
+                                    </svg>
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.50006 0.796875L11.5207 7.01572H18.0596L12.7695 10.8592L14.7902 17.078L9.50006 13.2346L4.20999 17.078L6.23062 10.8592L0.940552 7.01572H7.47943L9.50006 0.796875Z" fill="#FFC700"/>
+                                    </svg>
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.50006 0.796875L11.5207 7.01572H18.0596L12.7695 10.8592L14.7902 17.078L9.50006 13.2346L4.20999 17.078L6.23062 10.8592L0.940552 7.01572H7.47943L9.50006 0.796875Z" fill="#FFC700"/>
+                                    </svg>
+                                    <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.50006 0.796875L11.5207 7.01572H18.0596L12.7695 10.8592L14.7902 17.078L9.50006 13.2346L4.20999 17.078L6.23062 10.8592L0.940552 7.01572H7.47943L9.50006 0.796875Z" fill="#FFC700"/>
+                                    </svg>
+                                </span>
+                                <p>{{ block.settings.review }}</p>
+                                <span>{{ block.settings.social }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const videoslider = new Swiper('.g-videos-slider', {
+            slidesPerView: 1,
+            grabCursor: true,
+            spaceBetween: 10,
+            pagination:  {
+                el: ".swiper-pagination",
+                clickable: true, 
+            },
+            preventClicks: false,
+            breakpoints: {
+                769: {
+                    slidesPerView: 5,
+                    spaceBetween: 28
+                }
+            }
+        });
+
+        // document.querySelectorAll('.g-video').forEach(videoContainer => {
+        //     const playButton = videoContainer.querySelector('.g-video-play');
+        //     const video = videoContainer.querySelector('video');
+        
+        //     if (video) {
+        //         playButton.addEventListener('click', () => {
+        //             if (video.paused) {
+        //                 video.play();
+        //                 playButton.style.display = 'none';
+        //             }
+        //         });
+        
+        //         video.addEventListener('click', () => {
+        //             if (!video.paused) {
+        //                 video.pause();
+        //                 playButton.style.display = 'flex';
+        //             }
+        //         });
+        
+        //         video.addEventListener('play', hidePlayButton);
+        //     }
+        // });
+
+        document.querySelectorAll(".g-video-player").forEach(videoContainer => {
+          videoContainer.addEventListener("click", function(){
+            const playButton = this.querySelector('.g-video-play');
+            const video = this.querySelector('video');
+
+            if (video) {
+              if (video.paused) {
+                  video.play();
+                  playButton.style.display = 'none';
+              }else{
+                  video.pause();
+                  playButton.style.display = 'flex';
+              }
+            }
+          });
+        });
+
+    });
+</script>
+                                  
+{% schema %}
+  {
+    "name": "MMS Videos",
+     "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "video",
+            "id": "video",
+            "label": "Video"
+          },
+          {
+            "type": "text",
+            "id": "review",
+            "label": "Review"
+          },
+          {
+            "type": "text",
+            "id": "social",
+            "label": "Social"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Videos"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,66 @@
+{%- assign image = section.settings.image -%}
+
+{%- if section.settings.button_link -%}
+<a href="{{ section.settings.button_link }}" class="banners__link">
+{%- endif -%}
+
+<div class="banners__wrapper" style="background-image: url('{{ image | image_url: width: image.width }}');">
+    <div class="page-width">
+        <div class="banners__content">
+            {%- if section.settings.title -%}
+                <h2>{{ section.settings.title }}</h2>
+            {%- endif -%}
+            {%- if section.settings.button_text != blank -%}
+                <span class="button">{{ section.settings.button_text }}</span>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{%- if section.settings.button_link -%}
+</a>
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Photography Banners",
+  "class": "banners",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "LIFESTYLE PHOTOGRAPHY"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Title",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Photography Banners"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

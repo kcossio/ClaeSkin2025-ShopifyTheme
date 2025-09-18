@@ -1,0 +1,140 @@
+<style> 
+    .g-listicle-blocks-wrap{
+        padding: 50px 20px;
+    }
+
+    .g-listicle-blocks{
+        display: flex;
+        flex-direction: column;
+        gap: 76px;
+    }
+
+    .g-listicle-wrap{
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .g-listicle-block{
+        display: flex;
+        align-items: center ;
+        gap: 20px;
+    }
+
+    .g-listicle-block-image{
+        height: 350px;
+        width: 40%;
+    }
+
+    .g-listicle-block-image img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    .g-listicle-block-content{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .g-listicle-block-content h3,
+    .g-listicle-block-content p{
+        margin: 0;
+        color: #2C1A0B;
+    }
+
+    .g-listicle-block-content h3{
+        font-weight: 500;
+        font-size: 28px;
+        line-height: 120%;
+    }
+
+    .g-listicle-block-content p{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .g-listicle-blocks{
+            gap: 28px;
+        }
+
+        .g-listicle-block{
+            flex-direction: column;
+        }
+        
+        .g-listicle-block-image,
+        .g-listicle-block-content{
+            width: 100%;
+        }
+
+        .g-listicle-block-image{
+            height: 253px;
+        }
+
+        .g-listicle-block-content h3{
+            font-size: 22px;
+        }
+
+        .g-listicle-block-content p{
+            font-size: 14px;
+            line-height: 120%;
+        }
+    }
+</style>
+<div class="g-listicle-blocks-wrap">
+    <div class="g-listicle-wrap">
+        <div class="g-listicle-blocks">
+            {% for block in section.blocks %}
+              <div class="g-listicle-block">
+                  <div class="g-listicle-block-image">
+                      <img src="{{ block.settings.image | image_url: width: "1000px" }}" width="" height="" alt="">
+                  </div>
+                  <div class="g-listicle-block-content">
+                      <h3>{{ block.settings.title }}</h3>
+                      {{ block.settings.content }}
+                  </div>
+              </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS Listicle Blocks",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "image-text",
+        "name": "Image Text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Listicle Blocks"
+      }
+    ]
+  }
+{% endschema %}

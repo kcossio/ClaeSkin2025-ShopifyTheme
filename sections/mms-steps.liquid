@@ -1,0 +1,193 @@
+<style>
+    .g-steps{
+        padding: 50px 20px;
+        background: {{ section.settings.bg }};
+    }
+
+    .g-steps h2{
+        font-weight: 500;
+        font-size: 42px;
+        line-height: 30px;
+        text-align: center;
+        color: {{ section.settings.text_color }};
+        margin: 0;
+    }
+
+    .g-steps-wrap{
+        margin-top: 50px;
+        display: flex;
+    }
+
+    .g-step{
+        width: 33.333%;
+        align-items: center;
+        display: flex;
+    }
+
+    .g-step-image img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        display: block;
+        border-radius: 3px;
+        border: 1px solid #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .g-step-image{
+        width: 42%;
+        padding-top: 55%;
+        position: relative;
+    }
+
+    .g-step-content{
+        width: 58%;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .g-step-content h3,
+    .g-step-content p,
+    .g-step-content span{
+        margin: 0;
+        color: {{ section.settings.text_color }};
+    }
+
+    .g-step-content span{
+        border-bottom: 1px solid {{ section.settings.text_color }};
+        padding-bottom: 15px;
+        font-weight: 300;
+    }
+
+    .g-step-content h3{
+        font-size: 27px;
+    }
+
+    .g-step-content p{
+        font-size: 18px;
+        line-height: 21px;
+        font-weight: 400;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-steps h2{
+            font-size: 28px;
+            line-height: 30px;
+        }
+
+        .g-steps{
+            padding: 30px 20px;
+        }
+
+        .g-steps-wrap{
+            margin-top: 30px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .g-step{
+            width: 100%;
+        }
+
+        .g-step > div{
+            width: 50%;
+        }
+
+        .g-step-content span{
+            font-size: 14px;
+            padding: 0;
+            border: 0;
+        }
+
+        .g-step-content h3{
+            font-size: 18px;
+        }
+
+        .g-step-content p{
+            font-size: 12px;
+            line-height: 14px;
+        }
+
+        .g-step-content{
+            padding: 15px;
+            justify-content: center;
+        }
+    }
+</style>
+<div class="g-steps">
+    <div class="g-wrap">
+        {{ section.settings.title }}
+        <div class="g-steps-wrap">
+            {% for block in section.blocks %}
+              <div class="g-step">
+                  <div class="g-step-image">
+                      <img src="{{ block.settings.image | image_url: width: "2000px" }}" width="" height="" alt="">
+                  </div>
+                  <div class="g-step-content">
+                      <span>Step {{ forloop.index }}</span>
+                      <h3>{{ block.settings.title }}</h3>
+                      <p>{{ block.settings.content }}</p>
+                  </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+    
+{% schema %}
+  {
+    "name": "MMS Steps",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#3C3224"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Steps"
+      }
+    ]
+  }
+{% endschema %}

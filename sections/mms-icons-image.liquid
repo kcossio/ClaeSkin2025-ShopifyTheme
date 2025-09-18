@@ -1,0 +1,238 @@
+<style>
+    .g-icons-image{
+        padding: 70px 20px;
+        position: relative;
+        background: {{ section.settings.bg }};
+    }
+
+    .g-icons-image-wrap{
+        display: flex;
+        align-items: flex-start;
+        margin-top: 40px;
+    }
+
+    .g-icons-image > p{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        color: #2C1A0B;
+    }
+
+    .g-icons-image h2{
+        font-weight: 700;
+        font-size: 42px;
+        line-height: 45px;
+        margin: 0 0 20px 0;
+        color: #2C1A0B;
+        text-align: center;
+    }
+
+    .g-icons-image h2 strong{
+        color: #90B499;
+    }
+
+    .g-ii-icons{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 50%;
+    }
+
+    .g-ii-icons > div{
+        width: calc(50% - 20px);
+        padding: 23px;
+        border: 1px solid #3C2D18;
+    }
+
+    .g-ii-image{
+        width: 50%;
+        position: relative;
+    }
+
+    .g-ii-image img{
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .g-ii-icons h3{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 24px;
+        margin: 0;
+        color: #3C3224;
+    }
+
+    .g-ii-icons p{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        margin: 0;
+        color: #3C3224;
+    }
+
+    .g-ii-icons > div img{
+        max-width: 51px;
+    }
+
+    .g-icons-image-fixed{
+        position: absolute;
+        bottom: -10%;
+        right: 0;
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .g-fixed-image{
+        position: absolute;
+        bottom: 0;
+        width: 50%;
+        height: 450px;
+        right: 0;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .g-icons-image-wrap{
+            flex-direction: column-reverse;
+        }
+
+        .g-icons-image-wrap{
+            margin-top: 30px;
+        }
+
+        .g-icons-image > p{
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .g-ii-icons,
+        .g-ii-image{
+            width: 100%;
+            gap: 12px;
+        }
+
+        .g-icons-image h2{
+            font-size: 28px;
+            line-height: 30px;
+            margin-bottom: 0;
+        }
+
+        .g-ii-icons h3{
+            font-size: 12px;
+            line-height: 16px;
+            margin: 6px 0 0 0;
+            font-weight: 500;
+        }
+
+        .g-ii-icons p{
+            font-size: 12px;
+            line-height: 16px;
+            margin: 6px 0;
+        }
+
+        .g-ii-icons > div{
+            width: calc(50% - 6px);
+            position: relative;
+            display: flex;
+            padding: 12px;
+            flex-direction: column;
+        }
+
+        .g-icons-image{
+            padding: 30px;
+            overflow: hidden;
+        }
+
+        .g-icons-image-fixed{
+            bottom: -22%;
+            transform: rotate(6deg);
+            max-width: 420px;
+            position: relative;
+            object-fit: unset;
+            height: unset;
+        }
+
+        .g-fixed-image{
+            height: unset;
+            position: relative;
+        }
+    }
+</style>
+<div class="g-icons-image">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.subtitle }}</p>
+    <div class="g-wrap">
+        <div class="g-icons-image-wrap">
+            <div class="g-ii-icons">
+                {% for block in section.blocks %}
+                <div>
+                    <img src="{{ block.settings.icon | image_url: width: "300px" }}" width="" height="" alt="">
+                    {{ block.settings.content }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="g-ii-image">
+                
+            </div>
+        </div>
+    </div>
+    <div class="g-fixed-image">
+      <img src="{{ section.settings.image | image_url: width: "2000px" }}" alt="" width="" height="" class="g-icons-image-fixed">
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "MMS Icons Image",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg",
+        "label": "Background Color",
+        "default": "#D1D7DE"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "MMS Icons Image"
+      }
+    ]
+  }
+{% endschema %}
