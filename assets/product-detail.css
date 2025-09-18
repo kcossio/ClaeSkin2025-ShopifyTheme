@@ -42,12 +42,20 @@
   margin: 0;
 }
 .g-pdp-methods .g-pdp-method-item--onetime .g-pdp-method {
+  border-radius: 0;
   padding: 15px 28px 15px 52px;
+}
+.g-pdp-methods .g-pdp-method-item--onetime .g-pdp-method.g-pdp-method--selected {
+  box-shadow: 0;
+  background: #cfcac0;
 }
 .g-pdp-methods .g-pdp-method-item--onetime .g-pdp-circle {
   top: 50%;
   transform: translateY(-50%);
   left: 19px;
+}
+.g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title {
+  padding-left: 0;
 }
 
 .g-pdp-wrapper {
