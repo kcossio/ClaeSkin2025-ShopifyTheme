@@ -39,7 +39,7 @@
                 <span class="g-pdp-circle"></span>
                 <div class="g-pdp-method-callout" style="background: {{ section.settings.callout_bg_1 }}">{{ section.settings.callout_text }}</div>
                 <div class="g-pdp-header--title">
-                    <span class="g-pdp-tag-title">1-month supply</span>
+                    <span class="g-pdp-tag-title">1-month subscription</span> <span class="g-pdp-save"><span>Save 10%</span></span>
                     <!-- <span id="price_per_bottle">
                     {% if product.variants.size > 1 %}
                         {{ product.variants[1].selling_plan_allocations.first.price_adjustments.first.price | divided_by: 2 | money }}
@@ -51,20 +51,21 @@
                     <span id="supply_days">Daily application for 1 person</span>
                     <span id="per_serving">{{ section.settings.app_per_day }}</span>
                 </div>
+                <div class="g-pdp-method-content">
+                  {% for block in section.blocks %}
+                  {% case block.type %}
+                      {% when 'usps' %}
+                      <div class="g-pdp-method-content-icon">
+                          {% comment %}
+                              <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
+                          {% endcomment %}
+                          <span>{{ block.settings.usp_text }}</span>
+                      </div>
+                  {% endcase %}
+                  {% endfor %}
+              </div>
             </div>
-            <div class="g-pdp-method-content">
-                {% for block in section.blocks %}
-                {% case block.type %}
-                    {% when 'usps' %}
-                    <div class="g-pdp-method-content-icon">
-                        {% comment %}
-                            <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
-                        {% endcomment %}
-                        <span>{{ block.settings.usp_text }}</span>
-                    </div>
-                {% endcase %}
-                {% endfor %}
-            </div>
+            
             <span id="price_per_bottle">
                 <span class="g-pdp-sale">{{ product.selected_or_first_available_selling_plan_allocation.price | money }}</span>
                 <span class="g-pdp-compare">{{ product.selected_or_first_available_selling_plan_allocation.compare_at_price | money }}</span>
@@ -98,22 +99,23 @@
                     <span class="g-pdp-circle"></span>
                     <div class="g-pdp-method-callout" style="background: {{ section.settings.callout_bg_2 }}">{{ section.settings.callout_text_2 }}</div>
                       <div class="g-pdp-header--title">
-                          <span class="g-pdp-tag-title">3-month supply</span>
+                          <span class="g-pdp-tag-title">3-month subscription</span> <span class="g-pdp-save"><span>Save 20%</span></span>
                       </div>
+                      <div class="g-pdp-method-content">
+                        {% for block in section.blocks %}
+                        {% case block.type %}
+                            {% when 'usps-dynamic' %}
+                            <div class="g-pdp-method-content-icon">
+                              {% comment %}
+                                   <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
+                              {% endcomment %} 
+                              <span>{{ block.settings.usp_text }}</span>
+                            </div>
+                        {% endcase %}
+                        {% endfor %}
+                    </div>
                   </div>
-                  <div class="g-pdp-method-content">
-                      {% for block in section.blocks %}
-                      {% case block.type %}
-                          {% when 'usps-dynamic' %}
-                          <div class="g-pdp-method-content-icon">
-                            {% comment %}
-                                 <img src="{{ block.settings.usp_icon | image_url: width: "200px" }}" width="" height="" alt="">
-                            {% endcomment %} 
-                            <span>{{ block.settings.usp_text }}</span>
-                          </div>
-                      {% endcase %}
-                      {% endfor %}
-                  </div>
+                  
                 <span id="price_per_bottle_xl">
                     <span class="g-pdp-sale">{{ block.settings.product_xl.price | money }}</span>
                     <span class="g-pdp-compare">{{ block.settings.product_xl.compare_at_price | money }}</span>
@@ -129,7 +131,7 @@
                 <div class="g-pdp-method-header">
                     <span class="g-pdp-circle"></span>
                     <div class="g-pdp-header--title">
-                        <span>One time purchase</span>
+                        <div class="g-pdp-tag-title"><span>One time purchase</span>One 50ml bottle</div>
                         <span id="price_per_bottle">
                             <span class="g-pdp-sale">One Bottle<span class="price">{{ product.price | money }}</span></span>
                         </span>

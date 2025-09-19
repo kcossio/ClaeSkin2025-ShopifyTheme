@@ -28,10 +28,36 @@
   border-bottom: 1px solid var(--theme-color);
   padding: 15px 28px 15px 52px;
   border-radius: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .g-pdp-methods .g-pdp-methods-items .g-pdp-method.g-pdp-method--selected {
   box-shadow: 0;
   background: #cfcac0;
+}
+.g-pdp-methods .g-pdp-methods-items .g-pdp-method .g-pdp-method-content-icon {
+  font-size: 13px;
+}
+.g-pdp-methods .g-pdp-methods-items .g-pdp-method .g-pdp-method-content-icon:nth-child(2) {
+  font-size: 11px;
+  font-weight: 400;
+}
+.g-pdp-methods .g-pdp-methods-items .g-pdp-method .g-pdp-save {
+  height: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 74px;
+}
+.g-pdp-methods .g-pdp-methods-items .g-pdp-method .g-pdp-save span {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  font-weight: 650;
+  color: #30231A;
+  text-transform: uppercase;
 }
 .g-pdp-methods .g-pdp-methods-items .g-pdp-method .g-pdp-circle {
   top: 50%;
@@ -56,6 +82,17 @@
 }
 .g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title {
   padding-left: 0;
+}
+.g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title .g-pdp-tag-title {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.39px;
+}
+.g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title .g-pdp-tag-title span {
+  display: block;
+  letter-spacing: 0.51px;
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .g-pdp-wrapper {
