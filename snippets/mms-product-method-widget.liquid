@@ -33,7 +33,7 @@
           data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" 
           data-compare="{{ product.price | money }}"
           data-vid  ="{{ product.selected_or_first_available_variant.id }}"
-          data-btn-text = "1-month supply"
+          data-btn-text = "One-month supply"
         >
             <div class="g-pdp-method-header">
                 <span class="g-pdp-circle"></span>
@@ -127,14 +127,29 @@
         {% endfor %}  
         </div>
         <div class="g-pdp-method-item g-pdp-method-item--onetime">
-            <div class="g-pdp-method" data-vid="{{ product.selected_or_first_available_variant.id }}" data-sp="" data-method="onetime" data-sale-ot="{{ product.price | money }}" data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" data-compare="{{ product.compare_at_price | money }}" data-btn-text = "One Bottle ">
+            <div class="g-pdp-method" data-vid="{{ product.selected_or_first_available_variant.id }}" data-sp="" data-method="onetime" data-sale-ot="{{ product.price | money }}" data-sale="{{ product.selected_or_first_available_selling_plan_allocation.price | money }}" data-compare="{{ product.compare_at_price | money }}" data-btn-text="One Bottle" data-base-price="{{ product.price }}">
                 <div class="g-pdp-method-header">
                     <span class="g-pdp-circle"></span>
                     <div class="g-pdp-header--title">
-                        <div class="g-pdp-tag-title"><span>One time purchase</span>One 50ml bottle</div>
-                        <span id="price_per_bottle">
-                            <span class="g-pdp-sale"><span class="price">{{ product.price | money_without_trailing_zeros }}</span></span>
-                        </span>
+                        <div class="g-pdp-tag-title">
+                          <span>One time purchase</span>
+                          <span class="g-pdp-quantity-title">One 50ml bottle</span>
+                      </div>
+                        <div class="g-pdp-price-quantity-wrapper">
+                            <span id="price_per_bottle">
+                                <span class="g-pdp-sale"><span class="price">{{ product.price | money_without_trailing_zeros }}</span></span>
+                            </span>
+                            <div class="g-pdp-quantity-selector">
+                                <span>Qty:</span>
+                                <div class="quantity-control">
+                                    <input type="number" class="g-pdp-qty-input" value="1" min="1" max="10" readonly>
+                                    <div class="quantity-buttons">
+                                        <button type="button" class="g-pdp-qty-btn g-pdp-qty-increase"></button>
+                                        <button type="button" class="g-pdp-qty-btn g-pdp-qty-decrease"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="g-pdp-header--sub">
                         <span class="per_serving">{{ section.settings.ot_callout_text }}</span>
@@ -167,51 +182,181 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
       const methods = document.querySelectorAll(".g-pdp-method");
-        methods.forEach(method => {
-            method.addEventListener("click", function(){
-                methods.forEach(m => m.classList.remove("g-pdp-method--selected"));
-
-                this.classList.add("g-pdp-method--selected");
-                const sp = this.getAttribute("data-sp");
-                document.querySelectorAll(".selling_plan").forEach(sellingplan => {
-                  sellingplan.value = sp;
-                });
-
-                const productInput = document.querySelector('input[name="product-id"]');
-                const idInput = document.querySelector('input[name="id"]');
-
-                const vid = this.getAttribute("data-vid");
+      let currentQuantity = 1;
       
-                //if (productInput) productInput.value = item.product_id;
-                if (idInput) idInput.value = vid;
-
-                const method = this.getAttribute("data-method");
-
-                let sale = "";
-                let compare = "";
-            
-                if(method === "onetime"){
-                  sale = this.getAttribute("data-sale-ot");
-                  compare = this.getAttribute("data-compare");
-                }else{
-                  sale = this.getAttribute("data-sale");
-                  compare = this.getAttribute("data-compare");
-                }
-
-                let btnText = this.getAttribute("data-btn-text");
-
-                document.querySelectorAll(".g-pdp-plan-text").forEach(btn => {
-                  btn.innerHTML = btnText;
-                });
-
-                document.querySelectorAll(".product-form .g-pdp-sale").forEach(saleElement => {
-                  saleElement.innerHTML =   sale;
-                });
-
-                document.querySelectorAll(".product-form .g-pdp-compare").forEach(compareElement => {
-                  compareElement.innerHTML = compare;
-                });
-            });
+      // Initialize button text based on default selected method
+      const defaultSelectedMethod = document.querySelector(".g-pdp-method--selected");
+      if (defaultSelectedMethod) {
+        const btnText = defaultSelectedMethod.getAttribute("data-btn-text");
+        document.querySelectorAll(".g-pdp-plan-text").forEach(btn => {
+          btn.innerHTML = btnText;
         });
+      }
+      
+      // Function to update pricing based on quantity
+      function updateQuantityPricing(method, quantity) {
+        const basePrice = parseInt(method.getAttribute("data-base-price"));
+        const totalPrice = basePrice * quantity;
+        const formattedPrice = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 2
+        }).format(totalPrice / 100);
+        
+        // Update the price display in the method
+        const saleElement = method.querySelector(".g-pdp-sale .price");
+        if (saleElement) {
+          saleElement.textContent = formattedPrice;
+        }
+        
+        // Update quantity title
+        const quantityTitle = method.querySelector(".g-pdp-quantity-title");
+        if (quantityTitle) {
+          if (quantity === 1) {
+            quantityTitle.textContent = "One 50ml bottle";
+          } else {
+            quantityTitle.textContent = `${quantity} × 50ml bottles`;
+          }
+        }
+        
+        // Update button text
+        const btnText = quantity === 1 ? "One Bottle" : `${quantity} Bottles`;
+        method.setAttribute("data-btn-text", btnText);
+        
+        // Update form prices if this method is selected
+        if (method.classList.contains("g-pdp-method--selected")) {
+          document.querySelectorAll(".product-form .g-pdp-sale").forEach(saleElement => {
+            saleElement.innerHTML = formattedPrice;
+          });
+          
+          document.querySelectorAll(".g-pdp-plan-text").forEach(btn => {
+            btn.innerHTML = btnText;
+          });
+          
+          // Update quantity input in the form if it exists
+          const quantityInput = document.querySelector('input[name="quantity"]');
+          if (quantityInput) {
+            quantityInput.value = quantity;
+          }
+          // Also update the hidden quantity input
+          const hiddenQuantityInput = document.querySelector('.quantity-input-hidden');
+          if (hiddenQuantityInput) {
+            hiddenQuantityInput.value = quantity;
+          }
+        }
+      }
+      
+      // Hover effects are now handled by CSS
+      
+      // Handle quantity selector events
+      document.addEventListener("click", function(e) {
+        if (e.target.classList.contains("g-pdp-qty-decrease")) {
+          const quantityControl = e.target.closest(".quantity-control");
+          const input = quantityControl.querySelector(".g-pdp-qty-input");
+          const method = e.target.closest(".g-pdp-method");
+          let quantity = parseInt(input.value);
+          if (quantity > 1) {
+            quantity--;
+            input.value = quantity;
+            currentQuantity = quantity;
+            updateQuantityPricing(method, quantity);
+          }
+        }
+        
+        if (e.target.classList.contains("g-pdp-qty-increase")) {
+          const quantityControl = e.target.closest(".quantity-control");
+          const input = quantityControl.querySelector(".g-pdp-qty-input");
+          const method = e.target.closest(".g-pdp-method");
+          let quantity = parseInt(input.value);
+          const maxQty = parseInt(input.getAttribute("max")) || 10;
+          if (quantity < maxQty) {
+            quantity++;
+            input.value = quantity;
+            currentQuantity = quantity;
+            updateQuantityPricing(method, quantity);
+          }
+        }
+      });
+        
+      methods.forEach(method => {
+          method.addEventListener("click", function(){
+              methods.forEach(m => m.classList.remove("g-pdp-method--selected"));
+
+              this.classList.add("g-pdp-method--selected");
+              const sp = this.getAttribute("data-sp");
+              document.querySelectorAll(".selling_plan").forEach(sellingplan => {
+                sellingplan.value = sp;
+              });
+
+              const productInput = document.querySelector('input[name="product-id"]');
+              const idInput = document.querySelector('input[name="id"]');
+
+              const vid = this.getAttribute("data-vid");
+    
+              //if (productInput) productInput.value = item.product_id;
+              if (idInput) idInput.value = vid;
+
+              const methodType = this.getAttribute("data-method");
+
+              let sale = "";
+              let compare = "";
+              
+              if(methodType === "onetime"){
+                // For one-time purchases, use current quantity
+                const quantityInput = this.querySelector(".g-pdp-qty-input");
+                const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+                const basePrice = parseInt(this.getAttribute("data-base-price"));
+                const totalPrice = basePrice * quantity;
+                const formattedPrice = new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 2
+                }).format(totalPrice / 100);
+                
+                sale = formattedPrice;
+                compare = this.getAttribute("data-compare");
+                
+                // Update quantity in form
+                const quantityFormInput = document.querySelector('input[name="quantity"]');
+                if (quantityFormInput) {
+                  quantityFormInput.value = quantity;
+                }
+                // Also update the hidden quantity input
+                const hiddenQuantityInput = document.querySelector('.quantity-input-hidden');
+                if (hiddenQuantityInput) {
+                  hiddenQuantityInput.value = quantity;
+                }
+              } else {
+                // For subscriptions, reset quantity to 1
+                const quantityFormInput = document.querySelector('input[name="quantity"]');
+                if (quantityFormInput) {
+                  quantityFormInput.value = 1;
+                }
+                // Also reset the hidden quantity input
+                const hiddenQuantityInput = document.querySelector('.quantity-input-hidden');
+                if (hiddenQuantityInput) {
+                  hiddenQuantityInput.value = 1;
+                }
+                sale = this.getAttribute("data-sale");
+                compare = this.getAttribute("data-compare");
+              }
+
+              let btnText = this.getAttribute("data-btn-text");
+
+              document.querySelectorAll(".g-pdp-plan-text").forEach(btn => {
+                btn.innerHTML = btnText;
+              });
+
+              document.querySelectorAll(".product-form .g-pdp-sale").forEach(saleElement => {
+                saleElement.innerHTML = sale;
+              });
+
+              document.querySelectorAll(".product-form .g-pdp-compare").forEach(compareElement => {
+                compareElement.innerHTML = compare;
+              });
+          });
+      });
     });
 </script>

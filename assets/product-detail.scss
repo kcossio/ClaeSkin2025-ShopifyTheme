@@ -162,11 +162,13 @@
                     font-weight: 600;
                     color:#3F3124;
                     line-height: 1.4;
+                    &.g-pdp-quantity-title {
+                        font-size:13px;
+                        font-weight: 400;
+                        letter-spacing: .39px;
+                    }
                 }
                 
-                font-size:13px;
-                font-weight: 400;
-                letter-spacing: .39px;
             }
         }
     }
@@ -883,9 +885,7 @@
     transition: all 0.5s;
 }
 
-.g-pdp-method--selected {
-    //box-shadow: 0 0 0 3px var(--theme-color);
-}
+// .g-pdp-method--selected styles are handled in the methods section above
 
 .g-pdp-method-callout {
     background: var(--theme-color) !important;
@@ -1187,5 +1187,105 @@
     .g-pdp-icon-content p,
     .g-pdp-icon-title {
         font-size: 15px;
+    }
+}
+
+// Price and Quantity Wrapper
+.g-pdp-price-quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+// Quantity Selector Styles
+.g-pdp-quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    > span {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+        display: none;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        background: #fbfbfb;
+        border: 1px solid #3F3124;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 30px;
+
+        .g-pdp-qty-input {
+            background: transparent;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            width: 30px;
+            height: 100%;
+            padding: 0;
+            outline: none;
+            
+            // Remove number input arrows
+            appearance: textfield;
+            -moz-appearance: textfield;
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        .quantity-buttons {
+            display: flex;
+            flex-direction: column;
+            background: #fbfbfb;
+            border-left: 1px solid #3F3124;
+
+            .g-pdp-qty-btn {
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                width: 20px;
+                height: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 13px;
+                color: #3F3124;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: #fbfbfb;
+                    color: #3F3124;
+                }
+
+                &:active {
+                    background: #fbfbfb;
+                }
+
+                &.g-pdp-qty-increase {
+                    border-bottom: 1px solid #3F3124;
+                }
+
+                // Arrow symbols
+                &.g-pdp-qty-increase::before {
+                    content: "∧";
+                    font-size: 10px;
+                }
+
+                &.g-pdp-qty-decrease::before {
+                    content: "∨";
+                    font-size: 10px;
+                }
+            }
+        }
     }
 }

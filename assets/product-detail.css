@@ -1,3 +1,4 @@
+@charset "UTF-8";
 #sn-product-widget {
   display: none !important;
 }
@@ -140,11 +141,6 @@
   color: #3f3124 !important;
   font-weight: 500;
 }
-.g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title .g-pdp-tag-title {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.39px;
-}
 .g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title .g-pdp-tag-title span {
   display: block;
   letter-spacing: 0.51px;
@@ -152,6 +148,11 @@
   font-weight: 600;
   color: #3F3124;
   line-height: 1.4;
+}
+.g-pdp-methods .g-pdp-method-item--onetime .g-pdp-header--title .g-pdp-tag-title span.g-pdp-quantity-title {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.39px;
 }
 
 .g-pdp-wrapper {
@@ -1099,4 +1100,88 @@
   .g-pdp-icon-title {
     font-size: 15px;
   }
+}
+.g-pdp-price-quantity-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.g-pdp-quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.g-pdp-quantity-selector > span {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  display: none;
+}
+.g-pdp-quantity-selector .quantity-control {
+  display: flex;
+  align-items: center;
+  background: #fbfbfb;
+  border: 1px solid #3F3124;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 30px;
+}
+.g-pdp-quantity-selector .quantity-control .g-pdp-qty-input {
+  background: transparent;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  width: 30px;
+  height: 100%;
+  padding: 0;
+  outline: none;
+  -webkit-appearance: textfield;
+          appearance: textfield;
+  -moz-appearance: textfield;
+}
+.g-pdp-quantity-selector .quantity-control .g-pdp-qty-input::-webkit-outer-spin-button, .g-pdp-quantity-selector .quantity-control .g-pdp-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons {
+  display: flex;
+  flex-direction: column;
+  background: #fbfbfb;
+  border-left: 1px solid #3F3124;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons .g-pdp-qty-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #3F3124;
+  transition: all 0.2s ease;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons .g-pdp-qty-btn:hover {
+  background: #fbfbfb;
+  color: #3F3124;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons .g-pdp-qty-btn:active {
+  background: #fbfbfb;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons .g-pdp-qty-btn.g-pdp-qty-increase {
+  border-bottom: 1px solid #3F3124;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons .g-pdp-qty-btn.g-pdp-qty-increase::before {
+  content: "∧";
+  font-size: 10px;
+}
+.g-pdp-quantity-selector .quantity-control .quantity-buttons .g-pdp-qty-btn.g-pdp-qty-decrease::before {
+  content: "∨";
+  font-size: 10px;
 }

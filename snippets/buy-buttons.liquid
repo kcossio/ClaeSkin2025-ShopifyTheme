@@ -69,6 +69,7 @@
         {%- endif -%}
 
         <input type="hidden" class="selling_plan" name="selling_plan" value="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}">
+        <input type="hidden" name="quantity" value="1" class="quantity-input-hidden">
 
         <div class="product-form__buttons">
           {%- liquid
