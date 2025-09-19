@@ -842,9 +842,6 @@ span.g-pdp-pricing-wrap {
   html {
     overflow-x: hidden;
   }
-  .g-pdp-methods-items .g-pdp-method-content {
-    min-height: 177px;
-  }
   :root {
     --heading-font-size: 35px;
   }

@@ -67,8 +67,8 @@
             </div>
             
             <span id="price_per_bottle">
-                <span class="g-pdp-sale">{{ product.selected_or_first_available_selling_plan_allocation.price | money }}</span>
-                <span class="g-pdp-compare">{{ product.selected_or_first_available_selling_plan_allocation.compare_at_price | money }}</span>
+                <span class="g-pdp-sale">{{ product.selected_or_first_available_selling_plan_allocation.price | money_without_trailing_zeros }}</span>
+                <span class="g-pdp-compare">{{ product.selected_or_first_available_selling_plan_allocation.compare_at_price | money_without_trailing_zeros }}</span>
             </span>
             {% if section.settings.show_limited_edition == true %}
               <div class="g-pdp-bottom-note">
@@ -117,8 +117,8 @@
                   </div>
                   
                 <span id="price_per_bottle_xl">
-                    <span class="g-pdp-sale">{{ block.settings.product_xl.price | money }}</span>
-                    <span class="g-pdp-compare">{{ block.settings.product_xl.compare_at_price | money }}</span>
+                    <span class="g-pdp-sale">{{ block.settings.product_xl.price | money_without_trailing_zeros }}</span>
+                    <span class="g-pdp-compare">{{ block.settings.product_xl.compare_at_price | money_without_trailing_zeros }}</span>
                 </span>
               </div>
               </div>
@@ -133,7 +133,7 @@
                     <div class="g-pdp-header--title">
                         <div class="g-pdp-tag-title"><span>One time purchase</span>One 50ml bottle</div>
                         <span id="price_per_bottle">
-                            <span class="g-pdp-sale">One Bottle<span class="price">{{ product.price | money }}</span></span>
+                            <span class="g-pdp-sale"><span class="price">{{ product.price | money_without_trailing_zeros }}</span></span>
                         </span>
                     </div>
                     <div class="g-pdp-header--sub">
